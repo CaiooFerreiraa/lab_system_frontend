@@ -54,11 +54,11 @@ function App() {
         <div>
           <label>Turno</label> <br />
           <label htmlFor="shiftA">A</label>
-          <input type="radio" name="shift" id="shiftA" value="A"/>
+          <input type="radio" name="shift" id="shiftA" value="Turno A"/>
           <label htmlFor="shiftB">B</label>
-          <input type="radio" name="shift" id="shiftB"  value="B"/>          
+          <input type="radio" name="shift" id="shiftB"  value="Turno B"/>          
           <label htmlFor="shiftC">C</label>
-          <input type="radio" name="shift" id="shiftC"  value="C"/>
+          <input type="radio" name="shift" id="shiftC"  value="Turno C"/>
         </div>
 
         <div>
