@@ -25,7 +25,6 @@ function App() {
         'Content-type': 'application/json'
       },
       body: JSON.stringify(objData),
-      credentials: 'include'
     })
       .then(response => {
         if (response.ok) {
