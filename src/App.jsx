@@ -19,7 +19,7 @@ function App() {
       }
     }
 
-    fetch("http://192.168.1.3:5000/employee/teste", {
+    fetch("https://lab-system-backend.onrender.com/employee/register", {
       method: "post",
       headers: {
         'Content-type': 'application/json'
