@@ -19,12 +19,13 @@ function App() {
       }
     }
 
-    fetch("https://lab-system-backend.onrender.com/employee/register", {
+    fetch('https://lab-system-backend.onrender.com/employee/register', {
       method: "post",
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify(objData)
+      body: JSON.stringify(objData),
+      credentials: 'include'
     })
       .then(response => {
         if (response.ok) {
