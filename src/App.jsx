@@ -1,75 +1,20 @@
-import './App.css'
+import HomePage from "./mobile/employee/HomePage.jsx"
+import MainCard from "./mobile/employee/MainCardEmployee.jsx"
+
+//const hostProduction = 'https://lab-system-backend.onrender.com/employee/register';
+//const hostDeployment = 'http://localhost:5000'
 
 function App() {
-  const handlesubmit = (ev) => {
-    ev.preventDefault();
-
-    const form = document.querySelector('#form-env');
-    const data = new FormData(form);
-
-    let objData = {};  
-
-    for (const pair of data.entries()) {
-      const key = pair[0];
-      const value = pair[1];
-
-      objData = {
-        ...objData,
-        [key]: value
-      }
-    }
-
-    fetch('https://lab-system-backend.onrender.com/employee/register', {
-      method: "post",
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(objData),
-    })
-      .then(response => {
-        if (response.ok) {
-          console.log("Tudo certo");
-        }
-      })
+  const info = {
+    tittle: "Funcionário"  
   }
 
   return (
     <>
-      <form id='form-env' onSubmit={handlesubmit}>
-        <div>
-          <label htmlFor="registration">Matricula</label><br />
-          <input type="text" name="registration" id="registration" />
-        </div>
-
-        <div>
-          <label htmlFor="name">Nome</label><br />
-          <input type="text" name="name" id="name" />
-        </div>
-
-        <div>
-          <label htmlFor="lastName">Sobrenome</label><br />
-          <input type="text" name="lastName" id="lastName" />
-        </div>
-
-        <div>
-          <label>Turno</label> <br />
-          <label htmlFor="shiftA">A</label>
-          <input type="radio" name="shift" id="shiftA" value="Turno A"/>
-          <label htmlFor="shiftB">B</label>
-          <input type="radio" name="shift" id="shiftB"  value="Turno B"/>          
-          <label htmlFor="shiftC">C</label>
-          <input type="radio" name="shift" id="shiftC"  value="Turno C"/>
-        </div>
-
-        <div>
-          <label htmlFor="phoneNumber">Número de Telefone</label><br />
-          <input type="tel" name="phoneNumber" id="phoneNumber"/>
-        </div>
-
-        <div>
-          <button type="submit">Enviar</button>
-        </div>
-      </form>
+      <div className='main'>
+        <HomePage infos={info}/>
+        <MainCard />
+      </div>
     </>
   )
 }
