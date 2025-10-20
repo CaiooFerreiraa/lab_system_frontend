@@ -1,18 +1,16 @@
-import HomePage from "./mobile/employee/HomePage.jsx"
-import MainCard from "./mobile/employee/MainCardEmployee.jsx"
-
-//const hostProduction = 'https://lab-system-backend.onrender.com/employee/register';
-//const hostDeployment = 'http://localhost:5000'
+import Header from "./mobile/employee/Header.jsx"
+import MainCard from "./mobile/employee/MainPageEmployee.jsx"
+import './index.css';
 
 function App() {
   const info = {
-    tittle: "Funcionário"  
+    tittle: "Funcionários"  
   }
 
   return (
     <>
       <div className='main'>
-        <HomePage infos={info}/>
+        <Header infos={info}/>
         <MainCard />
       </div>
     </>

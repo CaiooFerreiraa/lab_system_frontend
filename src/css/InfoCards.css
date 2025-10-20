@@ -1,0 +1,55 @@
+#cardMain {
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  height: 210px;
+  margin: 20px auto;
+  padding: 5px 10px;
+  background-color: white;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.485);
+  border-radius: 10px;
+}
+
+.infos {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-size: 1.2em;
+
+  .nome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+    width: 100%;
+    font-size: 1.3em;
+
+    .imgName {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      background-color: rgb(120, 57, 205);
+      color: white;
+    }
+  }
+}
+
+.functionButtons {
+  position: absolute;
+  right: 0;
+  margin-right: 5px;
+
+  button {
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+}
