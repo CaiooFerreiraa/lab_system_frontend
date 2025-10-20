@@ -1,7 +1,7 @@
 import InfosCards from "./_components/InfosCards.jsx";
 import { useEffect, useState } from "react"
 
-const hostDeployment = 'http://192.168.1.2:5000'
+const hostDeployment = import.meta.env.VITE_API_URL;
 
 export default function MainPageEmployee() {
   const [employees, setEmployees] = useState([]);
