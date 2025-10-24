@@ -23,3 +23,28 @@
     background-color: rgb(243, 243, 243);
   }
 }
+
+#registerEmployee {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    height: 40px;
+    width: 100%;
+    background-color: rgb(120, 57, 205);
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .link:hover {
+    background-color: rgb(137, 74, 219);
+  }
+}

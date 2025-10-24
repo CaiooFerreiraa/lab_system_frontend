@@ -5,10 +5,14 @@
   margin: 0;
 }
 
+#root {
+  background-color: rgb(249, 250, 252);
+  height: 100vh;
+}
+
 .main {
   display: flex;
   flex-direction: column;
   margin: auto;
   width: 95%;
-  background-color: rgb(249, 250, 252);
 }
