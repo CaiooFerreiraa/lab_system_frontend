@@ -1,13 +1,13 @@
 import Header from '../_components/Header.jsx'
 
-export default function Form({ user, handleFunction, handleChange, registration, shift, setShift }) {
+export default function Form({ user, handleFunction, handleChange, registration,success, error, shift, setShift }) {
   return (
     <>
       <div>
-        {/* <div className="msg">
+        <div className="msg">
           {success && alert("Cadastro/Atualização realizado com sucesso!")}
           {error && alert("Ocorreu um erro ao cadastrar.")}
-        </div> */}
+        </div>
         <form id="formRegister" onSubmit={handleFunction}>
           <div className="labelForm">
             <label htmlFor="name">Nome:</label>
