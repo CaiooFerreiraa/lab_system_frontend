@@ -1,8 +1,4 @@
-import '../../css/Header.css';
-
-export default function HomePage({ infos }) {
-  const tittle = infos?.tittle;
-
+export default function HomePage({ tittle }) {
   return (
     <>
       <div id="headerBar">
