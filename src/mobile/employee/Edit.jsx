@@ -4,7 +4,7 @@ import Form from "./_components/Form";
 import Header from './_components/Header'
 
 export default function Edit() {
-  const hostDeployment = import.meta.env.VITE_API_DEVELOPMENT;
+  const hostDeployment = import.meta.env.VITE_API_URL;
   const { registration } = useParams();
   const [user, setUser] = useState({});
   const [shift, setShift] = useState();

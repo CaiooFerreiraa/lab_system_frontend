@@ -1,5 +1,3 @@
-import Header from '../_components/Header.jsx'
-
 export default function Form({ user, handleFunction, handleChange, registration,success, error, shift, setShift }) {
   return (
     <>

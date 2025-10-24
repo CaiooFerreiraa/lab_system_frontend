@@ -4,7 +4,7 @@ import Header from './_components/Header.jsx'
 import Form from "./_components/Form";
 
 export default function Register() {
-  const hostDeployment = import.meta.env.VITE_API_DEVELOPMENT
+  const hostDeployment = import.meta.env.VITE_API_URL
   const { registration } = useParams();
   const [user, setUser] = useState({});
   const [shift, setShift] = useState();
