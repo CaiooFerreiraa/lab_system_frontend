@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function MainPageEmployee() {
   const [employees, setEmployees] = useState([]);
-  const hostDeployment = import.meta.env.VITE_API_DEVELOPMENT;
+  const hostDeployment = import.meta.env.VITE_API_URL;
 
   const fetchEmployeeFromApi = () => {
     fetch(`${hostDeployment}/employee/view`)

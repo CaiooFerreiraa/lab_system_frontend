@@ -11,7 +11,7 @@ export default function InfosCards({ infosElement = [], onRefresh }) {
 }
 
 function InfoCard({ data, onRefresh }) {
-  const hostDeployment = import.meta.env.VITE_API_DEVELOPMENT; 
+  const hostDeployment = import.meta.env.VITE_API_URL; 
   const navigate = useNavigate();
 
   const handleEdit = (ev) => {
