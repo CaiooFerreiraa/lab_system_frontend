@@ -58,6 +58,7 @@ export default function Edit() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(markData),
     })
+      .then(response => {if (response.ok) alert("Marca atualizada com sucesso")})
       .catch(err => console.error("Erro ao atualizar:", err));
   };
 
