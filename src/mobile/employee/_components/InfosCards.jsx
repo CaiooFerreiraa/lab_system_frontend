@@ -27,7 +27,7 @@ function InfoCard({ data, onRefresh }) {
     const card = ev.target.parentNode.parentNode
     const registration = card.querySelector('.matricula').querySelector('.value').innerHTML
 
-    if (!confirm("Deseja apagar esse funcionário??")) return
+    if (!confirm("Deseja apagar esse funcionário?")) return
 
     fetch(`${hostDeployment}/employee/delete/${registration}`, {method: "delete"})
       .then(response => {if (response.ok) onRefresh()})

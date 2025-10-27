@@ -22,8 +22,7 @@ export default function Register() {
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(dataMark)
     })
-      .then(response => response.json())
-      .then(responseMark => console.log(responseMark))
+      .then(response => {if (response.ok) alert("Marca cadastrada com sucesso")})
       .catch(err => console.error("Houve um erro: " + err));
   };
 
