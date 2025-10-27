@@ -69,7 +69,7 @@ export default function HomePage({ tittle, setSearch }) {
 
             <h2>Menu</h2>
             <ul>
-              <li><Link to="/">Página Inicio</Link></li>
+              <li><Link to="/">Pagina Início</Link></li>
               <li><a href="#">Relatórios</a></li>
               <li><a href="#">Configurações</a></li>
             </ul>
@@ -83,6 +83,7 @@ export default function HomePage({ tittle, setSearch }) {
         </>
       )}
 
+      {/* BARRA DE PESQUISA */}
       {searchOpen && (
         <form onSubmit={handleSearchSubmit} className="formSearch">
           <input

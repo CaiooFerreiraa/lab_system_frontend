@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
-export default function InfosCards({ infosElement = [], onRefresh }) {
+export default function InfosCard({ employees = [], search = "", onRefresh }) {
+  const filteredEmployees = employees.filter(employee => 
+    employee.nome.toLowerCase().includes(search.toLowerCase())
+  );
   return (
     <>
-      {infosElement.map((element, index) => (
-        <InfoCard key={index} data={element} onRefresh={onRefresh}/>
+      {filteredEmployees.map((element, index) => (
+        <InfoCard data={element} key={index} onRefresh={onRefresh} />
       ))}
     </>
   );
@@ -15,23 +18,19 @@ function InfoCard({ data, onRefresh }) {
   const navigate = useNavigate();
 
   const handleEdit = (ev) => {
-
     const card = ev.target.parentNode.parentNode
     const registration = card.querySelector('.matricula').querySelector('.value').innerHTML
-  
     navigate(`/employee/edit/${registration}`);
   }
 
   const handleDelete = (ev) => {
     const card = ev.target.parentNode.parentNode
     const registration = card.querySelector('.matricula').querySelector('.value').innerHTML
-  
-    fetch(`${hostDeployment}/employee/delete/${registration}`, {method: "post"})
-      .then(response => {
-        if (response.ok) {
-          onRefresh()
-        }
-      })
+
+    if (!confirm("Deseja apagar esse funcionário??")) return
+
+    fetch(`${hostDeployment}/employee/delete/${registration}`, {method: "delete"})
+      .then(response => {if (response.ok) onRefresh()})
       .catch(err => console.error("Houve um error: " + err));
   }
 
@@ -42,8 +41,8 @@ function InfoCard({ data, onRefresh }) {
       ))}
 
       <div className="functionButtons">
-        <button className="material-symbols-outlined" onClick={handleDelete}>delete</button>
-        <button className="material-symbols-outlined" onClick={handleEdit}>edit</button>
+        <button className="material-symbols-outlined" onClick={handleDelete} type="button">delete</button>
+        <button className="material-symbols-outlined" onClick={handleEdit} type="button">edit</button>
       </div>
     </div>
   );

@@ -8,38 +8,29 @@ export default function Edit() {
   const { registration } = useParams();
   const [user, setUser] = useState({});
   const [shift, setShift] = useState();
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false);
   const fetchedRef = useRef(false);
 
-  // buscar dados
   useEffect(() => {
     if (fetchedRef.current) return;
     fetchedRef.current = true;
-
-    if (registration) {
-      fetch(`${hostDeployment}/employee/resgater/${registration}`, {
-        method: "POST",
-      })
-        .then((res) => res.json())
-        .then((employeeData) => {
-          setUser({
-            registration: employeeData.matricula,
-            name: employeeData.nome,
-            lastName: employeeData.sobrenome,
-            shift: employeeData.turno,
-            phoneNumber: employeeData.telefone
-          })
+    fetch(`${hostDeployment}/employee/resgater/${registration}`)
+      .then((res) => res.json())
+      .then((employeeData) => {
+        setUser({
+          registration: employeeData.matricula,
+          name: employeeData.nome,
+          lastName: employeeData.sobrenome,
+          shift: employeeData.turno,
+          phoneNumber: employeeData.telefone
         })
-        .catch((err) => console.error("Houve um erro: " + err));
-    }
+      })
+      .catch((err) => console.error("Houve um erro: " + err));
   }, [registration, hostDeployment]);
 
   useEffect(() => {
     if (user.shift) setShift(user.shift);
   }, [user]);
 
-  // evento de mudança genérico
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prev) => ({ ...prev, [name]: value }));
@@ -47,26 +38,21 @@ export default function Edit() {
 
   const handleEdit = (event) => {
     event.preventDefault();
+    if(!confirm("Deseja atualizar esse funcionário?")) return
     fetch(`${hostDeployment}/employee/update`, {
-      method: "POST",
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
     })
-      .then((response) => {
-        if (response.ok) {
-          setSuccess(true)
-          setError(false)
-        } else {
-          setError(true)
-          setSuccess(false)
-        };
+      .then(() => {
+        alert("Funcionário Atualizado")
       })
       .catch((err) => console.error("Houve um erro: " + err));
   };
 
   return (
     <>
-      <Header tittle={"Atualizar Funcionário"}/>
+      <h1 className="tittle">Editar Funcionário</h1>
       <div className="formMain">
         <Form 
           user={user} 
@@ -75,12 +61,7 @@ export default function Edit() {
           registration={registration}
           shift={shift}
           setShift={setShift}
-          success={success}
-          error={error}
         />
-        <Link to="/" className="material-symbols-outlined arrow-back">
-          arrow_back
-        </Link>
       </div>
     </>
   );
