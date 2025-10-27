@@ -1,11 +1,9 @@
-export default function Form({ user, handleFunction, handleChange, registration,success, error, shift, setShift }) {
+import { Link } from "react-router-dom"
+
+export default function Form({ user, handleFunction, handleChange, registration, shift, setShift }) {
   return (
     <>
       <div>
-        <div className="msg">
-          {success && alert("Cadastro/Atualização realizado com sucesso!")}
-          {error && alert("Ocorreu um erro ao cadastrar.")}
-        </div>
         <form id="formRegister" onSubmit={handleFunction}>
           <div className="labelForm">
             <label htmlFor="name">Nome:</label>
@@ -76,12 +74,18 @@ export default function Form({ user, handleFunction, handleChange, registration,
               type="tel"
               name="phoneNumber"
               id="phoneNumber"
-              value={user.phoneNumber}
+              defaultValue={user.phoneNumber}
               onChange={handleChange}
             />
           </div>
 
-          <button type="submit" id="subButton">Cadastrar</button>
+          
+          <div className="but">
+            <button type="submit" id="subButton">Cadastrar</button>
+            <Link to="/employee" className="material-symbols-outlined arrow-back">
+              arrow_back
+            </Link>
+          </div>
         </form>
       </div>
     </>
