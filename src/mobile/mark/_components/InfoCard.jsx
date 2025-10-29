@@ -36,7 +36,7 @@ function Card({ data, onRefresh }) {
         if (Array.isArray(value)) {
         return (
           <div className={key} key={key}>
-              <span className='keyMetodo'>Metodos:</span>
+              <span className='keyMetodo'>Metodos</span>
               <span className='value'>
               {value.map((met, i) => {
                 if (met.nome == null) return

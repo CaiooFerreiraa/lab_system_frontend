@@ -2,6 +2,8 @@ import './index.css';
 import './css/Form.css'
 import './css/Header.css'
 import './css/InfoCards.css'
+import './css/Load.css'
+import './css/PopUp.css'
 import { Routes, Route } from "react-router-dom";
 import HomeEmployee from './mobile/employee/Home';
 import RegisterEmployee from './mobile/employee/Register';

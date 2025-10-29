@@ -70,6 +70,10 @@ input {
   }
 }
 
+button {
+  cursor: pointer;
+}
+
 .arrow-back {
   display: flex;
   align-items: center;
