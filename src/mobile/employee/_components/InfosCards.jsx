@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Load from "./Load";
 
 export default function InfosCard({ employees = [], search = "", onRefresh }) {
   const filteredEmployees = employees.filter(employee => 

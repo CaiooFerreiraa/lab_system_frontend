@@ -46,7 +46,9 @@ export default function Form({ user, handleFunction, handleChange, registration,
               id="shiftA"
               defaultValue="Turno A"
               checked={shift === "Turno A"}
-              onChange={(e) => setShift(e.target.value)}
+              onChange={(e) => {
+                setShift(e.target.value)
+              }}
             />
             <label htmlFor="shiftB">Turno B</label>
             <input
@@ -55,7 +57,9 @@ export default function Form({ user, handleFunction, handleChange, registration,
               id="shiftB"
               defaultValue="Turno B"
               checked={shift === "Turno B"}
-              onChange={(e) => setShift(e.target.value)}
+              onChange={(e) => {
+                setShift(e.target.value)
+              }}
             />
             <label htmlFor="shiftC">Turno C</label>
             <input
@@ -64,7 +68,9 @@ export default function Form({ user, handleFunction, handleChange, registration,
               id="shiftC"
               defaultValue="Turno C"
               checked={shift === "Turno C"}
-              onChange={(e) => setShift(e.target.value)}
+              onChange={(e) => {
+                setShift(e.target.value)
+              }}
             />
           </div>
 
@@ -81,7 +87,7 @@ export default function Form({ user, handleFunction, handleChange, registration,
 
           
           <div className="but">
-            <button type="submit" id="subButton">Cadastrar</button>
+            <button type="submit" id="subButton">Enviar</button>
             <Link to="/employee" className="material-symbols-outlined arrow-back">
               arrow_back
             </Link>

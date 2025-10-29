@@ -1,122 +1,177 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import Load from "./_components/Load";
+import PopUp from "./_components/PopUp";
 
 export default function Edit() {
   const [markData, setMarkData] = useState({ marca: "", metodo: [] });
   const host = import.meta.env.VITE_API_URL;
-  const useRefer = useRef(false);
   const { mark } = useParams();
 
-  useEffect(() => {
-    if (useRefer.current) return;
-    useRefer.current = true;
+  const [loading, setLoading] = useState(false);
+  const [popUp, setPopUp] = useState(false);
+  const [msg, setMsg] = useState("");
 
-    // 🔹 Busca dados da marca pelo nome (GET)
-    fetch(`${host}/mark/update/${mark}`)
-      .then(res => res.json())
-      .then(response => {
-        setMarkData(response[0]);
-      })
-      .catch(err => console.error("Erro ao buscar marca:", err));
+  useEffect(() => {
+    const fetchMark = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`${host}/mark/update/${mark}`);
+        if (!res.ok) throw new Error("Erro ao buscar marca");
+        const data = await res.json();
+        setMarkData(data[0]);
+      } catch (err) {
+        console.error(err);
+        setMsg("Erro ao carregar dados da marca.");
+        setPopUp(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMark();
   }, [host, mark]);
 
   const handleChangeMethod = (index, field, value) => {
-    const updatedMethods = [...markData.metodo];
-    updatedMethods[index][field] = value;
-    setMarkData({ ...markData, metodo: updatedMethods });
+    setMarkData((prev) => {
+      const updated = [...prev.metodo];
+      updated[index] = { ...updated[index], [field]: value };
+      return { ...prev, metodo: updated };
+    });
   };
 
-  function addMethod() {
-    setMarkData(prev => ({
+  // 🔹 Adiciona um novo método
+  const addMethod = () => {
+    setMarkData((prev) => ({
       ...prev,
-      metodo: [...prev.metodo, { nome: "", descricao: "" }]
+      metodo: [...prev.metodo, { nome: "", descricao: "" }],
     }));
-  }
+  };
 
-  const handleDeleteMethod = (cod_metodo) => {
+  // 🔹 Remove método (tanto local quanto no servidor)
+  const handleDeleteMethod = async (cod_metodo) => {
+    // Se o método ainda não foi salvo no backend
     if (!cod_metodo) {
-      setMarkData(prev => ({
+      setMarkData((prev) => ({
         ...prev,
-        metodo: prev.metodo.filter(m => m.cod_metodo !== cod_metodo)
+        metodo: prev.metodo.slice(0, -1),
       }));
       return;
     }
 
     if (!confirm("Deseja realmente deletar este método?")) return;
 
-    fetch(`${host}/mark/delete/method/${cod_metodo}`,{method: 'DELETE'})
-      .then(response => console.log(response))
-      .catch(err => console.error("Houve um erro: " + err))
-  }
+    try {
+      setLoading(true);
+      const res = await fetch(`${host}/mark/delete/method/${cod_metodo}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Erro ao deletar método");
 
-  const handleSubmit = (ev) => {
+      setMarkData((prev) => ({
+        ...prev,
+        metodo: prev.metodo.filter((m) => m.cod_metodo !== cod_metodo),
+      }));
+
+      setMsg("Método deletado com sucesso!");
+      setPopUp(true);
+    } catch (err) {
+      console.error(err);
+      setMsg("Erro ao deletar método.");
+      setPopUp(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 🔹 Submete a edição
+  const handleSubmit = async (ev) => {
     ev.preventDefault();
 
-    // 🔹 Atualiza os dados (PUT ou POST)
-    fetch(`${host}/mark/updateMark`, {
-      method: "put",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(markData),
-    })
-      .then(response => {if (response.ok) alert("Marca atualizada com sucesso")})
-      .catch(err => console.error("Erro ao atualizar:", err));
+    try {
+      setLoading(true);
+      const res = await fetch(`${host}/mark/updateMark`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(markData),
+      });
+
+      if (!res.ok) throw new Error("Erro ao atualizar marca");
+
+      setMsg("Marca atualizada com sucesso!");
+      setPopUp(true);
+    } catch (err) {
+      console.error(err);
+      setMsg("Falha ao atualizar a marca.");
+      setPopUp(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
+      {loading && <Load />}
+      {popUp && <PopUp msg={msg} setPopUp={setPopUp} />}
+
       <h1 className="tittle">Editar Marca: {mark}</h1>
-      <div>
-        <form onSubmit={handleSubmit} id="editFormMark">
-          <div>
-            <label>Marca</label>
+
+      <form onSubmit={handleSubmit} id="editFormMark">
+        <div>
+          <label>Marca</label>
+          <input
+            type="text"
+            value={markData.marca || ""}
+            onChange={(e) =>
+              setMarkData({ ...markData, marca: e.target.value })
+            }
+            disabled
+          />
+        </div>
+
+        <h3>Métodos</h3>
+        {markData.metodo.map((met, index) => (
+          <div key={index}>
             <input
               type="text"
-              defaultValue={markData.marca}
+              placeholder="Nome do método"
+              value={met.nome || ""}
               onChange={(e) =>
-                setMarkData({ ...markData, marca: e.target.value })
+                handleChangeMethod(index, "nome", e.target.value)
               }
-              disabled
             />
+            <textarea
+              placeholder="Descrição"
+              value={met.descricao || ""}
+              onChange={(e) =>
+                handleChangeMethod(index, "descricao", e.target.value)
+              }
+            />
+            <button
+              type="button"
+              className="material-symbols-outlined deleteMethod"
+              onClick={() => handleDeleteMethod(met.cod_metodo)}
+            >
+              delete
+            </button>
           </div>
+        ))}
 
-          <h3>Métodos</h3>
-          {markData.metodo.map((met, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                placeholder="Nome do método"
-                defaultValue={met.nome}
-                onChange={(e) =>
-                  handleChangeMethod(index, "nome", e.target.value)
-                }
-              />
-              <textarea
-                placeholder="Descrição"
-                defaultValue={met.descricao}
-                onChange={(e) =>
-                  handleChangeMethod(index, "descricao", e.target.value)
-                }
-              />
-              <button className="material-symbols-outlined deleteMethod" onClick={() => handleDeleteMethod(met.cod_metodo)}>delete</button>
-            </div>
-          ))}
+        <button
+          type="button"
+          onClick={addMethod}
+          className="material-symbols-outlined addMethod"
+        >
+          add_box
+        </button>
 
-          <button
-            type="button"
-            onClick={addMethod}
-            className="material-symbols-outlined addMethod"
-          >
-            add_box
-          </button>
-
-          <div className="but">
-            <button type="submit">Salvar</button>
-            <Link to="/mark" className="material-symbols-outlined arrow-back">
-              arrow_back
-            </Link>
-          </div>
-        </form>
-      </div>
+        <div className="but">
+          <button type="submit">Atualizar</button>
+          <Link to="/mark" className="material-symbols-outlined arrow-back">
+            arrow_back
+          </Link>
+        </div>
+      </form>
     </>
   );
 }
