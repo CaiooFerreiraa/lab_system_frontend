@@ -4,7 +4,6 @@ import './css/Header.css'
 import './css/InfoCards.css'
 import './css/Load.css'
 import './css/PopUp.css'
-import './css/reset.css'
 import { Routes, Route } from "react-router-dom";
 import HomeEmployee from './mobile/employee/Home';
 import RegisterEmployee from './mobile/employee/Register';
