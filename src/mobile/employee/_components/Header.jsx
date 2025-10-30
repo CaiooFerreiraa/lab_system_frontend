@@ -24,22 +24,22 @@ export default function HomePage({ tittle, setSearch }) {
 
   const handleMenu = () => {
     if (menuOpen) {
-      // Animação de saída
       setIsClosing(true);
       setTimeout(() => {
         setMenuOpen(false);
         setIsClosing(false);
-      }, 400); // duração da animação no CSS
+      }, 400); // duração da animação
     } else {
       setMenuOpen(true);
     }
   };
 
   return (
-    <>
-      <div id="headerBar">
-        <h1>{tittle}</h1>
-        <div id="buttons">
+    <header id="header">
+      <div id="headerBar" className="header-bar">
+        <h1 className="header-title">{tittle}</h1>
+
+        <div id="buttons" className="header-buttons">
           <span
             className="material-symbols-outlined"
             onClick={handleSearchClick}
@@ -56,9 +56,26 @@ export default function HomePage({ tittle, setSearch }) {
           </span>
         </div>
       </div>
+
+      {/* 🔹 Campo de busca */}
+      {searchOpen && (
+        <div className="header-search">
+          <form onSubmit={handleSearchSubmit} className="formSearch">
+            <input
+              type="text"
+              placeholder="Digite sua pesquisa..."
+              value={query}
+              onChange={handleSearchChange}
+            />
+            <button type="submit">Buscar</button>
+          </form>
+        </div>
+      )}
+
+      {/* 🔹 Menu lateral com overlay */}
       {(menuOpen || isClosing) && (
         <>
-          <div className={`menu ${isClosing ? "closing" : "active"}`}>
+          <nav className={`menu ${isClosing ? "closing" : "active"}`}>
             <button
               type="button"
               className="material-symbols-outlined closeButton"
@@ -69,11 +86,11 @@ export default function HomePage({ tittle, setSearch }) {
 
             <h2>Menu</h2>
             <ul>
-              <li><Link to="/">Página Inicio</Link></li>
+              <li><Link to="/">Página Início</Link></li>
               <li><a href="#">Relatórios</a></li>
               <li><a href="#">Configurações</a></li>
             </ul>
-          </div>
+          </nav>
 
           <div
             id="overlay"
@@ -82,18 +99,6 @@ export default function HomePage({ tittle, setSearch }) {
           ></div>
         </>
       )}
-
-      {searchOpen && (
-        <form onSubmit={handleSearchSubmit} className="formSearch">
-          <input
-            type="text"
-            placeholder="Digite sua pesquisa..."
-            value={query}
-            onChange={handleSearchChange}
-          />
-          <button type="submit">Buscar</button>
-        </form>
-      )}
-    </>
+    </header>
   );
 }

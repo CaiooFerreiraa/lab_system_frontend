@@ -6,7 +6,7 @@ import PopUp from "./_components/PopUp";
 
 export default function Register() {
   const host = import.meta.env.VITE_API_URL;
-  const { registration } = useParams(); // só use se realmente precisar
+  const { registration } = useParams(); // caso precise futuramente
   const [user, setUser] = useState({});
   const [shift, setShift] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,6 @@ export default function Register() {
     event.preventDefault();
 
     const newUser = { ...user, shift };
-
     setLoading(true);
 
     try {
@@ -36,13 +35,12 @@ export default function Register() {
 
       if (res.ok) {
         setMsg(data.msg || "Funcionário registrado com sucesso!");
-        setPopUp(true);
       } else {
         setMsg(data.msg || "Erro ao registrar funcionário.");
-        setPopUp(true);
       }
+      setPopUp(true);
     } catch (err) {
-      console.error(err)
+      console.error(err);
       setMsg("Falha na conexão com o servidor.");
       setPopUp(true);
     } finally {
@@ -54,17 +52,27 @@ export default function Register() {
     <>
       {loading && <Load />}
       {popUp && <PopUp msg={msg} setPopUp={setPopUp} />}
-      <h1 className="tittle">Registrar Funcionário</h1>
-      <div className="formMain">
-        <Form
-          user={user}
-          handleChange={handleChange}
-          handleFunction={handleRegister}
-          registration={registration}
-          shift={shift}
-          setShift={setShift}
-        />
-      </div>
+
+      <main className="register-main">
+        <header className="register-header">
+          <h1 className="tittle">Registrar Funcionário</h1>
+        </header>
+
+        <section className="register-section">
+          <div className="formMain">
+            <div className="form-container">
+              <Form
+                user={user}
+                handleChange={handleChange}
+                handleFunction={handleRegister}
+                registration={registration}
+                shift={shift}
+                setShift={setShift}
+              />
+            </div>
+          </div>
+        </section>
+      </main>
     </>
   );
 }

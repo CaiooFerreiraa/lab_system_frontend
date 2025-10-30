@@ -1,4 +1,4 @@
-import MainCardMark from "./_components/MainCardMark"
+import MainCard from "./_components/MainCardMark"
 import Header from './_components/Header'
 import { useState, useEffect } from "react"
 
@@ -20,10 +20,23 @@ export default function Home() {
     }, [])
   return (
     <>
-      <div className='main'>
-        <Header tittle={"Marcas"} setSearch={setSearch}/>
-        <MainCardMark dataMarks={dataMarks} fetchMarkFromApi={fetchMarkFromApi} search={search}/>
-      </div>
+      <main className="main">
+            {/* Cabeçalho fixo/topo */}
+            <header className="home-header">
+              <Header tittle={"Marcas"} setSearch={setSearch} />
+            </header>
+      
+            {/* Container principal centralizado */}
+            <section className="home-content">
+              <div className="content-wrapper">
+                <MainCard
+                  dataMarks={dataMarks}
+                  search={search}
+                  onRefresh={fetchMarkFromApi}
+                />
+              </div>
+            </section>
+          </main>
     </>
   )
 }
