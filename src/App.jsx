@@ -12,7 +12,7 @@ import HomeApp from './HomeApp';
 import HomeMark from './mobile/mark/Home'
 import RegisterMark from './mobile/mark/Register'
 import EditMark from './mobile/mark/Edit'
-import HomeDesktop from './desktop/home'
+import HomeDesktop from './desktop/Home'
 import isDesktop from './hook/isDesktop'
 
 function App() {
