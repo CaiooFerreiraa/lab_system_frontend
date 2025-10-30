@@ -154,6 +154,7 @@
   #registerFormMark {
     box-shadow: none;
     border: 1px solid lightgray;
+    width: 95%;
   }
 
   .formMain {
