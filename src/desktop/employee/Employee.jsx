@@ -7,7 +7,6 @@ export default function Employee({search}) {
   const [employees, setEmployees] = useState([]);
   const host = import.meta.env.VITE_API_URL;
   const [loading, setLoading] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [msg, setMsg] = useState("");
 
@@ -34,7 +33,7 @@ export default function Employee({search}) {
       {loading && <Load />}
       {popUp && <PopUp />}
       <div className="main-card">
-        <Card employees={employees} search={search} onRefresh={fetchEmployeeFromApi} setPopUp={setPopUp} setMsg={setMsg}/>
+        <Card employees={employees} search={search} onRefresh={fetchEmployeeFromApi} setPopUp={setPopUp} setMsg={setMsg} setLoading={setLoading}/>
       </div>
     </>
   )
