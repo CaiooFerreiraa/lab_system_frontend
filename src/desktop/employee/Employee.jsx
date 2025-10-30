@@ -31,7 +31,7 @@ export default function Employee({search}) {
   return (
     <>
       {loading && <Load />}
-      {popUp && <PopUp />}
+      {popUp && <PopUp msg={msg} setMsg={setMsg}/>}
       <div className="main-card">
         <Card employees={employees} search={search} onRefresh={fetchEmployeeFromApi} setPopUp={setPopUp} setMsg={setMsg} setLoading={setLoading}/>
       </div>
