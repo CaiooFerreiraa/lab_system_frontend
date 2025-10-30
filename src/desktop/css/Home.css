@@ -157,10 +157,9 @@
     width: 95%;
   }
 
-  #editFromMark {
+  #editFormMark {
     margin: 10px auto;
     width: 95%;
-    margin: ;
     box-shadow: none;
     border: 1px solid lightgray;
   }
