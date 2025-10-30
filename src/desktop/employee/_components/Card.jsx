@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Card({ employees = [], search = "", onRefresh, setPopUp, setMsg }) {
+export default function Card({ employees = [], search = "", onRefresh, setPopUp, setMsg, setLoading }) {
   const filteredEmployees = employees.filter((employee) =>
     employee.nome.toLowerCase().includes(search.toLowerCase())
   );
@@ -8,13 +8,13 @@ export default function Card({ employees = [], search = "", onRefresh, setPopUp,
   return (
     <div>
       {filteredEmployees.map((element, index) => (
-        <InfoCard data={element} key={index} onRefresh={onRefresh} setPopUp={setPopUp} setMsg={setMsg}/>
+        <InfoCard data={element} key={index} onRefresh={onRefresh} setPopUp={setPopUp} setMsg={setMsg} setLoading={setLoading}/>
       ))}
     </div>
   )
 }
 
-function InfoCard({data, onRefresh, setPopUp, setMsg}) {
+function InfoCard({data, onRefresh, setPopUp, setMsg, setLoading}) {
   const hostDeployment = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
@@ -30,15 +30,19 @@ function InfoCard({data, onRefresh, setPopUp, setMsg}) {
 
     if (!confirm("Deseja apagar esse funcionário?")) return;
 
+    setLoading(true)
+
     fetch(`${hostDeployment}/employee/delete/${registration}`, { method: "DELETE" })
       .then((response) => {
         if (response.ok) {
           setMsg("Funcionário excuído com sucesso");
           setPopUp(true)
+          setLoading(false)
           onRefresh()
         };
       })
-      .catch((err) => console.error("Houve um erro: " + err));
+      .catch((err) => console.error("Houve um erro: " + err))
+      .finaly(() => setLoading(false));
   };
 
   return (
