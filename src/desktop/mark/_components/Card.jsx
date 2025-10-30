@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Card({ marks = [], search = "", onRefresh }) {
+export default function Card({ marks = [], search = "", onRefresh, setPopUp }) {
   const filteredMarks = marks.filter((mark) =>
     mark.marca.toLowerCase().includes(search.toLowerCase())
   );
@@ -8,20 +8,23 @@ export default function Card({ marks = [], search = "", onRefresh }) {
   return (
     <div>
       {filteredMarks.map((element, index) => (
-        <InfoCard data={element} key={index} onRefresh={onRefresh} />
+        <InfoCard data={element} key={index} onRefresh={onRefresh} setPopUp={setPopUp}/>
       ))}
     </div>
   )
 }
 
-function InfoCard({data, onRefresh}) {
+function InfoCard({data, onRefresh, setPopUp}) {
   const host = import.meta.env.VITE_API_URL
   const navigate = useNavigate();
 
   const handleDelete = () => {
     if (!confirm("Deseja excluir essa marca?")) return
     fetch(`${host}/mark/delete/${data.marca}`, {method: "DELETE"})
-      .then(() => onRefresh())
+      .then(() => {
+        setPopUp(true);
+        onRefresh();
+      })
       .catch(err => console.error("Houve um erro: " + err))
   }
 
