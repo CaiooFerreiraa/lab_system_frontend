@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "./_components/Card";
 import Load from "./_components/Load";
-import PopUp from "./_components";
+import PopUp from "./_components/PopUp";
 
 export default function Mark({search}) {
   const [marks, setMarks] = useState([]);
