@@ -42,7 +42,7 @@ function InfoCard({data, onRefresh, setPopUp, setMsg, setLoading}) {
         };
       })
       .catch((err) => console.error("Houve um erro: " + err))
-      .finaly(() => setLoading(false));
+      .finally(() => setLoading(false));
   };
 
   return (
