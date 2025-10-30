@@ -33,7 +33,7 @@ export default function Register() {
 
       if (!responseData.ok) throw new Error("Erro ao cadastrar a marca");
 
-      setMsg("Marca cadastrada com sucesso com sucesso!");
+      setMsg("Marca cadastrada com sucesso!");
       setPopUp(true);
     } catch (err) {
       setMsg(err.message);
