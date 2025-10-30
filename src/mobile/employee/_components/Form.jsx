@@ -14,7 +14,7 @@ export default function Form({
         {/* 🔹 Nome e Sobrenome */}
         <div className="form-row">
           <div className="labelForm">
-            <label htmlFor="name">Nome:</label>
+            <label htmlFor="name">Nome:*</label>
             <input
               type="text"
               name="name"
@@ -25,7 +25,7 @@ export default function Form({
           </div>
 
           <div className="labelForm">
-            <label htmlFor="lastName">Sobrenome:</label>
+            <label htmlFor="lastName">Sobrenome:*</label>
             <input
               type="text"
               name="lastName"
@@ -38,7 +38,7 @@ export default function Form({
 
         {/* 🔹 Matrícula */}
         <div className="labelForm">
-          <label htmlFor="registration">Matrícula</label>
+          <label htmlFor="registration">Matrícula*</label>
           <input
             type="text"
             name="registration"
@@ -91,7 +91,7 @@ export default function Form({
 
         {/* 🔹 Telefone */}
         <div className="labelForm">
-          <label htmlFor="phoneNumber">Telefone:</label>
+          <label htmlFor="phoneNumber">Telefone:*</label>
           <input
             type="tel"
             name="phoneNumber"
