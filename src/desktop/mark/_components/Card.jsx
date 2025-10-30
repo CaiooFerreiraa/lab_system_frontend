@@ -23,6 +23,7 @@ function InfoCard({data, onRefresh, setPopUp}) {
     fetch(`${host}/mark/delete/${data.marca}`, {method: "DELETE"})
       .then(() => {
         setPopUp(true);
+        setMsg("Funcionário excluído com sucesso");
         onRefresh();
       })
       .catch(err => console.error("Houve um erro: " + err))
