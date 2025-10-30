@@ -29,13 +29,14 @@ export default function Register() {
         body: JSON.stringify(dataMark),
       });
 
-      if (!response.ok) throw new Error("Erro ao cadastrar marca");
+      const responseData = await response.json();
 
-      setMsg("Marca cadastrada com sucesso!");
+      if (!responseData.ok) throw new Error("Erro ao cadastrar a marca");
+
+      setMsg("Marca cadastrada com sucesso com sucesso!");
       setPopUp(true);
     } catch (err) {
-      console.error(err);
-      setMsg("Erro ao cadastrar. Verifique os dados.");
+      setMsg(err.message);
       setPopUp(true);
     } finally {
       setLoading(false);
@@ -118,21 +119,20 @@ export default function Register() {
                   </div>
                 ))}
 
-                <button
-                  type="button"
-                  onClick={addMethod}
-                  className="material-symbols-outlined addMethod"
-                >
-                  add_box
-                </button>
-
                 <div className="but">
-                  <button type="submit" disabled={loading}>
-                    {loading ? "Cadastrando..." : "Cadastrar"}
-                  </button>
-                  <Link to="/mark" className="material-symbols-outlined arrow-back">
-                    arrow_back
-                  </Link>
+                    <button
+                      type="button"
+                      onClick={addMethod}
+                      className="material-symbols-outlined addMethod"
+                    >
+                      add_box
+                    </button>
+                    <Link to="/mark" className="material-symbols-outlined arrow-back">
+                      arrow_back
+                    </Link>
+                    <button type="submit" disabled={loading}>
+                      {loading ? "Cadastrando..." : "Cadastrar"}
+                    </button>
                 </div>
               </form>
             </div>

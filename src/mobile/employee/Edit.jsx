@@ -53,11 +53,10 @@ export default function Edit() {
     event.preventDefault();
 
     if (!confirm("Deseja atualizar esse funcionário?")) return;
-
-    setLoading(true);
     const updatedUser = { ...user, shift };
 
     try {
+      setLoading(true);
       const res = await fetch(`${hostDeployment}/employee/update`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

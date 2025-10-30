@@ -157,15 +157,14 @@ export default function Edit() {
           </div>
         ))}
 
-        <button
-          type="button"
-          onClick={addMethod}
-          className="material-symbols-outlined addMethod"
-        >
-          add_box
-        </button>
-
         <div className="but">
+          <button
+            type="button"
+            onClick={addMethod}
+            className="material-symbols-outlined addMethod"
+          >
+            add_box
+          </button>
           <button type="submit">Atualizar</button>
           <Link to="/mark" className="material-symbols-outlined arrow-back">
             arrow_back
