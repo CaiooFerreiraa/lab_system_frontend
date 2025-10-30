@@ -22,7 +22,7 @@ function InfoCard({data, onRefresh, setPopUp, setMsg}) {
     if (!confirm("Deseja excluir essa marca?")) return
     fetch(`${host}/mark/delete/${data.marca}`, {method: "DELETE"})
       .then(() => {
-        setMsg("Funcionário excluído com sucesso");
+        setMsg("Marca excluído com sucesso");
         setPopUp(true);
         onRefresh();
       })
