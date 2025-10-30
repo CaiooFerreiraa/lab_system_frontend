@@ -1,27 +1,20 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
-export default function InfoCard({ marks = [], search = "", onRefresh }) {
-  const filteredMarks = marks.filter(mark =>
+export default function Card({ marks = [], search = "", onRefresh }) {
+  const filteredMarks = marks.filter((mark) =>
     mark.marca.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <section className="infos-section">
-      <div className="infos-wrapper">
-        {filteredMarks.length > 0 ? (
-          filteredMarks.map((element, index) => (
-            <Card data={element} key={index} onRefresh={onRefresh} />
-          ))
-        ) : (
-          <p className="no-results">Nenhuma Marca encontrada.</p>
-        )}
-      </div>
-    </section>
-  );
+    <div>
+      {filteredMarks.map((element, index) => (
+        <InfoCard data={element} key={index} onRefresh={onRefresh} />
+      ))}
+    </div>
+  )
 }
 
-
-function Card({ data, onRefresh }) {
+function InfoCard({data, onRefresh}) {
   const host = import.meta.env.VITE_API_URL
   const navigate = useNavigate();
 
@@ -37,7 +30,7 @@ function Card({ data, onRefresh }) {
   };
 
   return (
-    <div className="cardMark">
+    <div className="cardMark-desktop">
       {Object.entries(data).map(([key, value]) => {
         if (Array.isArray(value)) {
         return (
@@ -64,10 +57,10 @@ function Card({ data, onRefresh }) {
           </div>
         );
       })}
-      <div className="buttonsMark">
-        <button className="material-symbols-outlined" onClick={handleDelete}>delete</button>
-        <button className="material-symbols-outlined" onClick={handleEdit}>edit</button>
+      <div className="functionButtons-desktop">
+        <button className="material-symbols-outlined action-desktop" onClick={handleDelete}>delete</button>
+        <button className="material-symbols-outlined action-desktop" onClick={handleEdit}>edit</button>
       </div>
     </div>
-  );
+  )
 }

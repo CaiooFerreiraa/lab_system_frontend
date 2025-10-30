@@ -1,38 +1,31 @@
 import { useNavigate } from "react-router-dom";
-import Load from "./Load";
 
-export default function InfosCard({ employees = [], search = "", onRefresh }) {
+export default function Card({ employees = [], search = "", onRefresh }) {
   const filteredEmployees = employees.filter((employee) =>
     employee.nome.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <section className="infos-section">
-      <div className="infos-wrapper">
-        {filteredEmployees.length > 0 ? (
-          filteredEmployees.map((element, index) => (
-            <InfoCard data={element} key={index} onRefresh={onRefresh} />
-          ))
-        ) : (
-          <p className="no-results">Nenhum funcionário encontrado.</p>
-        )}
-      </div>
-    </section>
-  );
+    <div>
+      {filteredEmployees.map((element, index) => (
+        <InfoCard data={element} key={index} onRefresh={onRefresh} />
+      ))}
+    </div>
+  )
 }
 
-function InfoCard({ data, onRefresh }) {
+function InfoCard({data, onRefresh}) {
   const hostDeployment = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const handleEdit = (ev) => {
-    const card = ev.target.closest(".card");
+    const card = ev.target.closest(".cardDesktop");
     const registration = card.querySelector(".matricula .value").innerHTML;
     navigate(`/employee/edit/${registration}`);
   };
 
   const handleDelete = (ev) => {
-    const card = ev.target.closest(".card");
+    const card = ev.target.closest(".cardDesktop");
     const registration = card.querySelector(".matricula .value").innerHTML;
 
     if (!confirm("Deseja apagar esse funcionário?")) return;
@@ -45,23 +38,23 @@ function InfoCard({ data, onRefresh }) {
   };
 
   return (
-    <article className="card">
-      <div className="card-content">
+    <article className="cardDesktop">
+      <div className="card-content-desktop">
         {Object.entries(data).map(([key, value]) => (
           <InfoField key={key} name={key} value={value} />
         ))}
       </div>
 
-      <div className="functionButtons">
+      <div className="functionButtons-desktop">
         <button
-          className="material-symbols-outlined"
+          className="material-symbols-outlined action-desktop"
           onClick={handleDelete}
           type="button"
         >
           delete
         </button>
         <button
-          className="material-symbols-outlined"
+          className="action-desktop material-symbols-outlined"
           onClick={handleEdit}
           type="button"
         >
@@ -74,13 +67,13 @@ function InfoCard({ data, onRefresh }) {
 
 function InfoField({ name, value }) {
   const isName = name === "nome";
-  const baseClass = `infos ${name}`;
+  const baseClass = `infos-desktop ${name}`;
 
   if (isName) {
     return (
       <div className={baseClass}>
-        <span className="nome">
-          <span className="imgName">{value?.[0]}</span>
+        <span className="nome-desktop">
+          <span className="imgName-desktop">{value?.[0]}</span>
           <span>{value}</span>
         </span>
       </div>

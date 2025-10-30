@@ -1,0 +1,185 @@
+@media (min-width: 1024px) {
+  :root {
+    --size-menu: 250px;
+    --size-header: 90px;
+  }
+
+  #root {
+    background-color: white;
+  }
+
+  .mainDesktop {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .navDesktop {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    position: fixed;
+    width: var(--size-menu);
+    height: 100vh;
+    background: rgb(249, 250, 252);
+    border: 1px solid black;
+  }
+
+  .container {
+    margin-left: var(--size-menu);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .headerDesktop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: calc(100% - var(--size-menu));
+    background-color: rgb(249, 250, 252);
+    height: var(--size-header);
+  }
+
+  .componente {
+    margin-top: var(--size-header);
+    flex: 1;
+    background-color: rgb(241, 241, 241);
+  }
+
+  .cardDesktop {
+    padding: 5px 10px;
+    border: 1px solid black;
+    background-color: white;
+  } 
+
+  .nome-desktop {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 600;
+
+    .imgName-desktop {
+      display: flex;
+      justify-content: center;
+      height: 50px;
+      width: 50px;
+      align-items: center;
+      margin-bottom: 5px;
+      background-color: rgb(120, 57, 205);
+      border-radius: 50%;
+      color: white;
+    }
+  }
+
+  .infos-desktop {
+    display: flex;
+    font-size: 15px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .functionButtons-desktop {
+    display: flex;
+    justify-content: flex-end;
+    color: black;
+    gap: 5px;
+
+    .action-desktop {
+      margin-top: 10px;
+      font-size: 30px;
+      border: none;
+      background-color: transparent;
+      color: black;
+    }
+  }
+
+  .link-desktop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: rgb(120, 57, 205);
+    text-decoration: none;
+    width: 200px;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    margin: auto;
+    height: 30px;
+  }
+
+  .link-desktop:hover {
+    background-color: rgb(96, 47, 161); 
+  }
+
+  .container-search {
+    input {
+      width: 60%;
+      margin: 5px 10px;
+    }
+  }
+
+  .cardMark-desktop {
+    padding: 5px 10px;
+    border: 1px solid black;
+    background-color: white;
+  }
+
+  #registerFormMark {
+    width: 100%;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.498);
+  }
+
+  .register-header {
+    display: none;
+  }
+
+  #formRegister {
+    width: 78vw;
+    border: none;
+    box-shadow: none;
+  }
+
+  .navDesktop ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tittle {
+    display: none;
+  }
+
+  .navDesktop li {
+    margin-bottom: 12px;
+  }
+
+  .menu-link {
+    color: black;
+    background-color: lightgray;
+    width: 200px;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+    display: inline-block;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+
+  /* hover opcional só pra dar aquela sensação */
+  .menu-link:hover {
+    background: rgba(0,0,0,0.05);
+  }
+
+  /* quando ativo */
+  .menu-link.active {
+    color: white;
+    background-color: rgb(120, 57, 205);
+  }
+
+}
