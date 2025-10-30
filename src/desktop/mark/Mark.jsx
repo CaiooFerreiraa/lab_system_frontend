@@ -32,7 +32,7 @@ export default function Mark({search}) {
       {loading && <Load />}
       {popUp && <PopUp msg={msg} setPopUp={setPopUp}/>}
       <div className="main-card">
-        <Card marks={marks} search={search} onRefresh={fetchMarkFromApi} setPopUp={setPopUp}/>
+        <Card marks={marks} search={search} onRefresh={fetchMarkFromApi} setPopUp={setPopUp} setMsg={setMsg}/>
       </div>
     </>
   )
