@@ -44,6 +44,10 @@
     border: 1px solid lightgray;
   }
 
+  .loadContainer {
+    z-index: 1000;
+  }
+
   .componente {
     overflow-y: auto;
     margin-top: var(--size-header);
