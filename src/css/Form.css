@@ -1,7 +1,6 @@
 /* Page Funcionário */
 .formMain {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
   background-color: rgb(249, 250, 252);
