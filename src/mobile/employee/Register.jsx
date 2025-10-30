@@ -33,15 +33,12 @@ export default function Register() {
 
       const data = await res.json();
 
-      if (res.ok) {
-        setMsg(data.msg || "Funcionário registrado com sucesso!");
-      } else {
-        setMsg(data.msg || "Erro ao registrar funcionário.");
-      }
+      if (!res.ok) setMsg(data.msg || "Erro ao registrar funcionário.");
+      
+      setMsg(data.msg || "Funcionário registrado com sucesso!");
       setPopUp(true);
     } catch (err) {
-      console.error(err);
-      setMsg("Falha na conexão com o servidor.");
+      setMsg(err.message);
       setPopUp(true);
     } finally {
       setLoading(false);

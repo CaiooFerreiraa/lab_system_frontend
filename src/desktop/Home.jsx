@@ -27,10 +27,16 @@ export default function HomeDesktop({page}) {
     <nav className='navDesktop'>
       <ul>
         <li>
-          <NavLink to="/employee" className="menu-link">Funcionário</NavLink>
+          <NavLink to="/employee" className="menu-link">
+            <span class="material-symbols-outlined">person_apron</span>
+            Funcionário
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/mark" className="menu-link">Marca</NavLink>
+          <NavLink to="/mark" className="menu-link">
+            <span class="material-symbols-outlined">diamond</span>
+            Marca
+          </NavLink>
         </li>
       </ul>
     </nav>
@@ -41,13 +47,13 @@ export default function HomeDesktop({page}) {
           <div className='container-search'>
             <input
               type="text"
-              placeholder="Digite sua pesquisa..."
+              placeholder="Pesquisa Global..."
               value={search}
               onChange={handleSearchChange}
             />
+            {element === "Funcionário" && ( <Link to={'/employee/register'} className='link-desktop'>Cadastrar {element}</Link> )}
+            {element === "Marca" && ( <Link to={'/mark/register'} className='link-desktop'>Cadastrar {element}</Link> )}
           </div>
-           {element === "Funcionário" && ( <Link to={'/employee/register'} className='link-desktop'>Cadastrar {element}</Link> )}
-           {element === "Marca" && ( <Link to={'/mark/register'} className='link-desktop'>Cadastrar {element}</Link> )}
         </header>
 
         <div className='componente'>

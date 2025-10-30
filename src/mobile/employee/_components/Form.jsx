@@ -103,12 +103,12 @@ export default function Form({
 
         {/* 🔹 Botões */}
         <div className="but">
-          <button type="submit" id="subButton">
-            Enviar
-          </button>
           <Link to="/employee" className="material-symbols-outlined arrow-back">
             arrow_back
           </Link>
+          <button type="submit" id="subButton">
+            Enviar
+          </button>
         </div>
       </form>
     </section>
