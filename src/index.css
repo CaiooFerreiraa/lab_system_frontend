@@ -10,6 +10,10 @@
   height: 100vh;
 }
 
+.loadContainer {
+  z-index: 1000;
+}
+
 .main {
   display: flex;
   flex-direction: column;
