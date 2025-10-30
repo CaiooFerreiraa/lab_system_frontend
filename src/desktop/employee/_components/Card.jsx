@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Card({ employees = [], search = "", onRefresh }) {
+export default function Card({ employees = [], search = "", onRefresh, setPopUp, setMsg }) {
   const filteredEmployees = employees.filter((employee) =>
     employee.nome.toLowerCase().includes(search.toLowerCase())
   );
@@ -8,13 +8,13 @@ export default function Card({ employees = [], search = "", onRefresh }) {
   return (
     <div>
       {filteredEmployees.map((element, index) => (
-        <InfoCard data={element} key={index} onRefresh={onRefresh} />
+        <InfoCard data={element} key={index} onRefresh={onRefresh} setPopUp={setPopUp} setMsg={setMsg}/>
       ))}
     </div>
   )
 }
 
-function InfoCard({data, onRefresh}) {
+function InfoCard({data, onRefresh, setPopUp, setMsg}) {
   const hostDeployment = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
@@ -32,7 +32,11 @@ function InfoCard({data, onRefresh}) {
 
     fetch(`${hostDeployment}/employee/delete/${registration}`, { method: "DELETE" })
       .then((response) => {
-        if (response.ok) onRefresh();
+        if (response.ok) {
+          setMsg("Funcionário excuído com sucesso");
+          setPopUp(true)
+          onRefresh()
+        };
       })
       .catch((err) => console.error("Houve um erro: " + err));
   };
