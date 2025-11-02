@@ -179,6 +179,11 @@
     height: 100%;
   }
 
+  .form-section {
+    margin-top: 10px;
+    width: 95%;
+  }
+
   .register-header {
     display: none;
   }
