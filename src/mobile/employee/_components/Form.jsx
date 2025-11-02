@@ -107,7 +107,8 @@ export default function Form({
             arrow_back
           </Link>
           <button type="submit" id="subButton">
-            Enviar
+            {user.name != '' && Atualizar}
+            {user.name == '' && Cadastrar}
           </button>
         </div>
       </form>
