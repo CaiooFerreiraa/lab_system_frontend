@@ -30,6 +30,7 @@
     margin-left: var(--size-menu);
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 
   .headerDesktop {
@@ -149,6 +150,7 @@
 
   .form-container {
     margin-top: 10px;
+    width: 95%;
   }
 
   #registerFormMark {
