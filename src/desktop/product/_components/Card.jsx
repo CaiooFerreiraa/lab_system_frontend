@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 export default function Card({ elemets = [], search = "", onRefresh }) {
-  const filteredMarks = elemets.filter((product) =>
+  const filteredMarks = elemets.filter((product) => 
     product.referencia.toLowerCase().includes(search.toLowerCase())
   );
 

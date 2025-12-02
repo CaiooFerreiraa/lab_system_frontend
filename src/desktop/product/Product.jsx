@@ -12,7 +12,6 @@ export default function Product({search}) {
     fetch(`${host}/product/read`)
       .then((response) => response.json())
       .then((dataproducts) => {
-        console.log(dataproducts)
         setProduct(dataproducts)
       })
       .catch((err) => console.error("Houve um error: ", err))

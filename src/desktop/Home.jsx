@@ -15,6 +15,9 @@ import Edit from './product/Edit';
 
 import RegisterSector from './sector/forms/Register';
 import EditSector from './sector/forms/Edit';
+import Model from './brand/Model';
+import RegisterModel from './brand/forms/Register';
+import EditModel from './brand/forms/Edit';
 
 export default function HomeDesktop({page}) {
   const [screen, setScreen] = useState(page || null); // "employee" | "mark" | null
@@ -27,6 +30,7 @@ export default function HomeDesktop({page}) {
     else if (page === "mark") setElement("Marca");
     else if (page === "product") setElement("Produto");
     else if (page === "sector") setElement("Setor");
+    else if (page === "model") setElement("Modelo");
     else setElement("");
   }, [page]);
 
@@ -60,6 +64,12 @@ export default function HomeDesktop({page}) {
             Produtos
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/model" className="menu-link">
+            <span className='material-symbols-outlined'>steps</span>
+            Modelos
+          </NavLink>
+        </li>
       </ul>
     </nav>
 
@@ -77,6 +87,7 @@ export default function HomeDesktop({page}) {
             {element === "Marca" && ( <Link to={'/mark/register'} className='link-desktop'>Cadastrar {element}</Link> )}
             {element === "Produto" && ( <Link to={'/product/register'} className='link-desktop'>Cadastrar {element}</Link> )}
             {element === "Setor" && ( <Link to={'/sector/register'} className='link-desktop'>Cadastrar {element}</Link> )}
+            {element === "Modelo" && ( <Link to={'/model/register'} className='link-desktop'>Cadastrar {element}</Link> )}
           </div>
         </header>
 
@@ -85,6 +96,7 @@ export default function HomeDesktop({page}) {
           {screen === "mark" && <Mark search={search} />}
           {screen === "product" && <Product search={search} />}
           {screen === 'sector' && <Sector search={search}/>}
+          {screen === 'model' && <Model search={search}/>}
 
           {page === "employee-register" && <RegisterEmployee />}
           {page === "employee-edit" && <EditEmployee />}
@@ -97,6 +109,9 @@ export default function HomeDesktop({page}) {
 
           {page === 'sector-register' && <RegisterSector/>}
           {page === 'sector-edit' && <EditSector/>}
+
+          {page === 'model-register' && <RegisterModel/>}
+          {page === 'model-edit' && <EditModel/>}
         </div>
       </div>
     </main>

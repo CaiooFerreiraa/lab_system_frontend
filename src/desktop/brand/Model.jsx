@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import CardModel from "./_components/CardModel";
 import Load from "./_components/Load";
+import Card from "./_components/Card";
 
 export default function Model({ search }) {
   const [models, setModels] = useState([]);
@@ -9,9 +9,11 @@ export default function Model({ search }) {
 
   const fetchModels = () => {
     setLoading(true);
-    fetch(`${host}/model/view`)
+    fetch(`${host}/model/read`)
       .then((response) => response.json())
-      .then((data) => setModels(data))
+      .then((data) => {
+        setModels(data.modelos)
+      })
       .catch((err) => console.error("Erro ao carregar modelos:", err))
       .finally(() => setLoading(false));
   };
@@ -24,7 +26,7 @@ export default function Model({ search }) {
     <>
       {loading && <Load />}
       <div className="main-card">
-        <CardModel models={models} search={search} onRefresh={fetchModels} />
+        <Card elements={models} search={search} onRefresh={fetchModels} />
       </div>
     </>
   );

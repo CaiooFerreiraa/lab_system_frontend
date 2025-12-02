@@ -48,6 +48,10 @@ function App() {
       <Route path='/sector' element={desktop ? <HomeDesktop page={"sector"}/> : <HomeProduct />} />
       <Route path='/sector/register' element={desktop ? <HomeDesktop page={"sector-register"}/> : <RegisterProduct />} />
       <Route path='/sector/edit/:uuid' element={desktop ? <HomeDesktop page={"sector-edit"}/> :<EditProduct />}/>
+
+      <Route path='/model' element={desktop ? <HomeDesktop page={"model"}/> : <HomeProduct />} />
+      <Route path='/model/register' element={desktop ? <HomeDesktop page={"model-register"}/> : <RegisterProduct />} />
+      <Route path='/model/edit/:uuid' element={desktop ? <HomeDesktop page={"model-edit"}/> :<EditProduct />}/>
     </Routes>
   )
 }
