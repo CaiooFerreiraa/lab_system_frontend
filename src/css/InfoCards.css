@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.card {
+.card, .card-product {
   position: relative;
   height: 210px;
   width: 100%;
@@ -15,6 +15,10 @@
   background-color: white;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.485);
   border-radius: 10px;
+}
+
+.card-product {
+  height: 110px;
 }
 
 .cardMark {

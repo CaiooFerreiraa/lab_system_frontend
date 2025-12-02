@@ -27,6 +27,7 @@ function Card({ data, onRefresh }) {
 
   const handleDelete = () => {
     if (!confirm("Deseja excluir essa marca?")) return
+    
     fetch(`${host}/mark/delete/${data.marca}`, {method: "DELETE"})
       .then(() => onRefresh())
       .catch(err => console.error("Houve um erro: " + err))
