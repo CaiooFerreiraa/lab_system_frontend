@@ -33,7 +33,7 @@ export default function Register() {
 
       if (!responseData.ok) throw new Error("Erro ao cadastrar a marca");
 
-      setMsg("Marca cadastrada com sucesso com sucesso!");
+      setMsg("Marca cadastrada com sucesso!");
       setPopUp(true);
     } catch (err) {
       setMsg(err.message);
@@ -74,7 +74,7 @@ export default function Register() {
             <div className="form-container">
               <form onSubmit={handleRegister} id="registerFormMark">
                 <div>
-                  <label htmlFor="mark">Nome da Marca</label>
+                  <label htmlFor="mark">Nome da Marca:*</label>
                   <input
                     type="text"
                     name="mark"
@@ -87,7 +87,7 @@ export default function Register() {
 
                 {methods.map((method, index) => (
                   <div key={method.id}>
-                    <label htmlFor={`method-${method.id}`}>Nome do Método {index + 1}</label>
+                    <label htmlFor={`method-${method.id}`}>Nome do Método {index + 1}*</label>
                     <input
                       type="text"
                       id={`method-${method.id}`}
@@ -96,7 +96,7 @@ export default function Register() {
                     />
 
                     <label htmlFor={`description-${method.id}`}>
-                      Descrição do método {index + 1}
+                      Descrição do método {index + 1}*
                     </label>
                     <textarea
                       id={`description-${method.id}`}
