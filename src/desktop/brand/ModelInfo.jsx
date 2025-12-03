@@ -48,7 +48,7 @@ export default function ModelInfo() {
         >
           edit
         </button>
-                <button 
+        <button 
           className="material-symbols-outlined edit-btn"
           onClick={() => handleDelete()}
         >

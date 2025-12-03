@@ -33,7 +33,13 @@ export default function Employee({search}) {
       {loading && <Load />}
       {popUp && <PopUp msg={msg} setPopUp={setPopUp}/>}
       <div className="main-card">
-        <Card employees={employees} search={search} onRefresh={fetchEmployeeFromApi} setPopUp={setPopUp} setMsg={setMsg} setLoading={setLoading}/>
+        <Card 
+          employees={employees} 
+          search={search} 
+          onRefresh={fetchEmployeeFromApi} 
+          setPopUp={setPopUp} 
+          setMsg={setMsg} 
+          setLoading={setLoading}/>
       </div>
     </>
   )

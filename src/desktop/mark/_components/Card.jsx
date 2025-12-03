@@ -1,25 +1,33 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Card({ marks = [], search = "", onRefresh, setPopUp, setMsg }) {
+export default function Card({ marks = [], search = "", onRefresh, setPopUp, setMsg, setLoading }) {
   const filteredMarks = marks.filter((mark) =>
-    mark.marca.toLowerCase().includes(search.toLowerCase())
+    mark?.marca.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div>
       {filteredMarks.map((element, index) => (
-        <InfoCard data={element} key={index} onRefresh={onRefresh} setPopUp={setPopUp} setMsg={setMsg}/>
+        <InfoCard 
+          data={element} 
+          key={index}
+          onRefresh={onRefresh} 
+          setPopUp={setPopUp} 
+          setMsg={setMsg} 
+          setLoading={setLoading}/>
       ))}
     </div>
   )
 }
 
-function InfoCard({data, onRefresh, setPopUp, setMsg}) {
+function InfoCard({data, onRefresh, setPopUp, setMsg, setLoading}) {
   const host = import.meta.env.VITE_API_URL
   const navigate = useNavigate();
 
   const handleDelete = () => {
     if (!confirm("Deseja excluir essa marca?")) return
+
+    setLoading(true)
     fetch(`${host}/mark/delete/${data.marca}`, {method: "DELETE"})
       .then(() => {
         setMsg("Marca excluído com sucesso");
@@ -27,6 +35,7 @@ function InfoCard({data, onRefresh, setPopUp, setMsg}) {
         onRefresh();
       })
       .catch(err => console.error("Houve um erro: " + err))
+      .finally(() => setLoading(false))
   }
 
   const handleEdit = () => {
