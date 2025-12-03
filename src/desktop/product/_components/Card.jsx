@@ -22,16 +22,14 @@ function InfoCard({data, onRefresh}) {
     if (!confirm("Deseja excluir essa marca?")) return
     const uuid = e.target.parentNode.parentNode.querySelector('.referencia').innerHTML
     const setor = e.target.parentNode.parentNode.querySelector('.setor').innerHTML
-    console.log(setor)
 
-    fetch(`${host}/product/delete?uuid=${uuid}&setor=${setor.toLowerCase()}`, {method: "DELETE"})
+    fetch(`${host}/product/delete?uuid=${uuid}&setor=${setor}`, {method: "DELETE"})
       .then(() => onRefresh())
       .catch(err => console.error("Houve um erro: " + err))
   }
 
   const handleEdit = (e) => {
     const uuid = e.target.parentNode.parentNode.querySelector('.referencia').innerHTML
-    console.log(uuid)
     navigate(`/product/edit/${uuid}`);
   };
 
