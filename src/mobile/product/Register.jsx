@@ -98,6 +98,18 @@ export default function Register() {
                           onChange={(e) => setType(e.target.value)}
                         />
                       </label>
+
+                      <label htmlFor="Base">
+                        Base
+                        <input
+                          type="radio"
+                          name="referencia"
+                          id="Base"
+                          defaultValue="Base"
+                          checked={type === "Base"}
+                          onChange={(e) => setType(e.target.value)}
+                        />
+                      </label>
                     </div>
                   </fieldset>
 

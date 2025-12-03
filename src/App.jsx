@@ -21,6 +21,7 @@ import RegisterProduct from './mobile/product/Register';
 import EditProduct from './mobile/product/Edit';
 
 import HomeDesktop from './desktop/Home'
+import SectorInfo from './desktop/sector/forms/SectorInfo';
 
 import isDesktop from './hook/isDesktop'
 
@@ -45,13 +46,15 @@ function App() {
       <Route path='/product/register' element={desktop ? <HomeDesktop page={"product-register"}/> : <RegisterProduct />} />
       <Route path='/product/edit/:uuid' element={desktop ? <HomeDesktop page={"product-edit"}/> :<EditProduct />}/>
 
-      <Route path='/sector' element={desktop ? <HomeDesktop page={"sector"}/> : <HomeProduct />} />
-      <Route path='/sector/register' element={desktop ? <HomeDesktop page={"sector-register"}/> : <RegisterProduct />} />
-      <Route path='/sector/edit/:uuid' element={desktop ? <HomeDesktop page={"sector-edit"}/> :<EditProduct />}/>
+      <Route path='/sector' element={desktop ? <HomeDesktop page={"sector"}/> : <HomeSector />} />
+      <Route path='/sector/register' element={desktop ? <HomeDesktop page={"sector-register"}/> : <RegisterSector />} />
+      <Route path='/sector/edit/:nome' element={desktop ? <HomeDesktop page={"sector-edit"}/> : <EditSector />}/>
+      <Route path='/sector/view/:nome' element={desktop ? <HomeDesktop page={"sector-view"}/> : <SectorInfo />} />
 
       <Route path='/model' element={desktop ? <HomeDesktop page={"model"}/> : <HomeProduct />} />
       <Route path='/model/register' element={desktop ? <HomeDesktop page={"model-register"}/> : <RegisterProduct />} />
       <Route path='/model/edit/:uuid' element={desktop ? <HomeDesktop page={"model-edit"}/> :<EditProduct />}/>
+      <Route path="/model/view/:nome" element={<HomeDesktop page={"model-view"}/>} />
     </Routes>
   )
 }

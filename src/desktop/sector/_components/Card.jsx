@@ -1,61 +1,90 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
+import { useState } from "react";
+import Load from "../_components/Load";
 
-export default function Card({ elemets = [], search = "", onRefresh }) {
-  const filteredItens = elemets.filter((sector) => 
-    sector.nome.toLowerCase().includes(search.toLowerCase())
-  );
+export default function Card({ elements = [], search = "", onRefresh }) { 
+  const filteredItems = elements.filter((sector) => 
+    sector.nome.toLowerCase().includes(search.toLowerCase()) 
+  ); 
 
-  return (
-    <div>
-      {filteredItens.map((element, index) => (
-        <InfoCard data={element} key={index} onRefresh={onRefresh} />
-      ))}
-    </div>
-  )
-}
+  return ( 
+    <div> 
+      {filteredItems.map((element, index) => ( 
+        <InfoCard data={element} key={index} onRefresh={onRefresh} /> 
+      ))} 
+    </div> 
+  ) 
+} 
 
-function InfoCard({data, onRefresh}) {
-  const host = import.meta.env.VITE_API_URL
-  const navigate = useNavigate();
+function InfoCard({data, onRefresh}) { 
+  const host = import.meta.env.VITE_API_URL 
+  const navigate = useNavigate(); 
+  const [loading, setLoading] = useState(false);
 
-  const handleListProducts = () => {
-    fetch(`${host}/product/list?setor=${data.nome.toLowerCase()}`)
-      .then(() => onRefresh())
-      .catch(err => console.error("Houve um erro: " + err))
-  }
+  const handleViewSector = () => { 
+    navigate(`/sector/view/${encodeURIComponent(data.nome)}`); 
+  } 
 
-  const handleDelete = () => {
-    if (!confirm("Deseja excluir esse produto?")) return;
+  const handleDelete = async () => { 
+    if (!confirm("Deseja excluir esse setor?")) return; 
+    
+    try {
+      setLoading(true);
+      const res = await fetch(`${host}/sector/delete?nome=${data.nome}`, { 
+        method: "DELETE", 
+      });
+      
+      const response = await res.json();
+      
+      if (response.ok !== 200) {
+        throw new Error(response.msg || "Erro ao excluir setor");
+      }
+      
+      alert("Setor excluído com sucesso!");
+      onRefresh();
+      
+    } catch (err) {
+      console.error("Houve um erro: ", err);
+      alert(err.message || "Erro ao excluir setor");
+    } finally {
+      setLoading(false);
+    }
+  }; 
 
-    const setor = data.nome;
+  const handleEdit = (ev) => { 
+    ev.stopPropagation();
+    navigate(`/sector/edit/${data.nome.toLowerCase()}`); 
+  }; 
 
-    fetch(`${host}/sector/delete?nome=${setor}`, {
-      method: "DELETE",
-    })
-      .then(() => onRefresh())
-      .catch((err) => console.error("Houve um erro: " + err));
-  };
-
-  const handleEdit = () => {
-    const uuid = data.nome;
-    navigate(`/sector/edit/${uuid}`);
-  };
-
-
-  return (
-    <div className="cardMark-desktop" onClick={handleListProducts}>
-      {Object.entries(data).map(([key, value]) => {
-        return (
-          <div className={`infos`} key={key}>
-            <span className="nameMark value">{value[0].toUpperCase()}</span>
-            <span className={`setor value`}>{value[0].toUpperCase() + value.slice(1)}</span>
-          </div>
-        );
-      })}
-      <div className="functionButtons-desktop">
-        <button className="material-symbols-outlined action-desktop" onClick={(ev) => handleDelete(ev)}>delete</button>
-        <button className="material-symbols-outlined action-desktop" onClick={(ev) => handleEdit(ev)}>edit</button>
-      </div>
-    </div>
-  )
+  return ( 
+    <>
+      {loading && <Load />}
+      <div className="cardMark-desktop" onClick={handleViewSector}> 
+        <div className="infos" key={data.nome}> 
+          <span className="nameMark value">{data.nome[0]?.toUpperCase() || "S"}</span> 
+          <span className="setor value">
+            {data.nome[0]?.toUpperCase() + data.nome?.slice(1)}
+          </span> 
+        </div> 
+        
+        <div className="functionButtons-desktop"> 
+          <button 
+            className="material-symbols-outlined action-desktop" 
+            onClick={(ev) => {
+              ev.stopPropagation();
+              handleDelete();
+            }}
+          >
+            delete
+          </button> 
+          <button 
+            className="material-symbols-outlined action-desktop" 
+            onClick={handleEdit}
+          >
+            edit
+          </button> 
+        </div> 
+      </div> 
+    </>
+  ) 
 }

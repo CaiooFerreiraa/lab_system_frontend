@@ -28,48 +28,44 @@ export default function EditModel() {
     const loadInitialData = async () => {
       try {
         setLoading(true);
+        console.log(uuid)
 
-        // ============================
-        // Carregar modelo atual
-        // ============================
+        // Buscar modelo
         const res = await fetch(`${host}/model/search/${encodeURIComponent(uuid)}`);
         const data = await res.json();
 
-        console.log(data)
+        console.log(data.modelo)
 
         if (!data.modelo) throw new Error("Modelo não encontrado");
 
-        setNome(data.modelo.nome);
-        setTipo(data.modelo.tipo);
-        setMarca(data.modelo.marca);
+        const modelo = data.modelo;
 
+        setNome(modelo.nome);
+        setTipo(modelo.tipo);
+        setMarca(modelo.marca);
+
+        // Mantém todas as especificações existentes corretamente
         setEspecificacoes(
-          data.modelo.especificacoes?.map((e) => ({
+          modelo.especificacoes?.map((e) => ({
             tipo: e.tipo,
             valor: e.valor,
+            variacao: e.variacao
           })) || []
         );
 
-        // ============================
-        // Carregar marcas
-        // ============================
+        // Marcas
         const resMarks = await fetch(`${host}/mark/view`);
         const dataMarks = await resMarks.json();
         if (Array.isArray(dataMarks)) {
-          const onlyNames = dataMarks.map((item) => item.marca);
-          setMarks(onlyNames);
+          setMarks(dataMarks.map((item) => item.marca));
         }
 
-        // ============================
-        // Carregar tipos de teste ENUM
-        // ============================
+        // Tipos de teste ENUM
         const resTypes = await fetch(`${host}/mark/list`);
         const dataTypes = await resTypes.json();
         if (dataTypes.ok === 200) setTestTypes(dataTypes.types);
 
-        // ============================
-        // Carregar tipo de calçado ENUM
-        // ============================
+        // Tipos de sapato ENUM
         const resShoe = await fetch(`${host}/mark/listTypeShoes`);
         const dataShoe = await resShoe.json();
         if (dataShoe.ok === 200) setShoeTypes(dataShoe.types);
@@ -86,36 +82,49 @@ export default function EditModel() {
   }, [host, uuid]);
 
   // ============================
-  // ➕ Adicionar especificação
+  // Calcular testes disponíveis
   // ============================
-  const addSpec = () => {
-    setEspecificacoes([...especificacoes, { tipo: "", valor: "" }]);
+  const getAvailableTests = (currentIndex) => {
+    const selectedTests = especificacoes
+      .map((e, i) => (i === currentIndex ? null : e.tipo))
+      .filter(Boolean);
+
+    return testTypes.filter((t) => !selectedTests.includes(t));
   };
 
   // ============================
-  // ➖ Remover especificação
+  // Add Spec
+  // ============================
+  const addSpec = () => {
+    setEspecificacoes([
+      ...especificacoes,
+      { tipo: "", valor: "", variacao: "" }
+    ]);
+  };
+
+  // ============================
+  // Remove Spec
   // ============================
   const removeSpec = (index) => {
     setEspecificacoes(especificacoes.filter((_, i) => i !== index));
   };
 
   // ============================
-  // ✏ Atualizar especificação
+  // Update Spec
   // ============================
   const updateSpec = (index, field, value) => {
-    const clone = [...especificacoes];
-    clone[index][field] = value;
-    setEspecificacoes(clone);
+    const newSpecs = [...especificacoes];
+    newSpecs[index][field] = value;
+    setEspecificacoes(newSpecs);
   };
 
   // ============================
-  // 📤 Enviar atualização
+  // Enviar atualização
   // ============================
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const dataModel = {
-      uuid,
       nome,
       tipo,
       marca,
@@ -132,7 +141,7 @@ export default function EditModel() {
       });
 
       const data = await res.json();
-      if (data.status !== 200) throw new Error(data.msg);
+      if (data.ok !== 200) throw new Error(data.msg);
 
       setMsg("Modelo atualizado com sucesso!");
       setPopUp(true);
@@ -199,28 +208,41 @@ export default function EditModel() {
                   {especificacoes.map((esp, index) => (
                     <div key={index} className="spec-item">
 
+                      {/* SELECT FILTRADO */}
                       <select
                         value={esp.tipo}
-                        onChange={(e) =>
-                          updateSpec(index, "tipo", e.target.value)
-                        }
+                        onChange={(e) => updateSpec(index, "tipo", e.target.value)}
                         required
                       >
                         <option value="">Tipo do Teste</option>
-                        {testTypes.map((t, i) => (
+
+                        {getAvailableTests(index).map((t, i) => (
                           <option key={i} value={t}>
                             {t}
                           </option>
                         ))}
+
+                        {/* Mantém o valor atual mesmo se já estiver usado */}
+                        {esp.tipo && !getAvailableTests(index).includes(esp.tipo) && (
+                          <option value={esp.tipo}>{esp.tipo}</option>
+                        )}
                       </select>
 
+                      {/* Valor */}
                       <input
                         type="number"
                         placeholder="Valor"
                         value={esp.valor}
-                        onChange={(e) =>
-                          updateSpec(index, "valor", e.target.value)
-                        }
+                        onChange={(e) => updateSpec(index, "valor", e.target.value)}
+                        required
+                      />
+
+                      {/* Variação */}
+                      <input
+                        type="number"
+                        placeholder="Variação"
+                        value={esp.variacao}
+                        onChange={(e) => updateSpec(index, "variacao", e.target.value)}
                         required
                       />
 
@@ -236,11 +258,7 @@ export default function EditModel() {
                     </div>
                   ))}
 
-                  <button
-                    type="button"
-                    className="add-btn"
-                    onClick={addSpec}
-                  >
+                  <button type="button" className="add-btn" onClick={addSpec}>
                     Adicionar Especificação
                   </button>
                 </div>
@@ -255,6 +273,7 @@ export default function EditModel() {
                     required
                   >
                     <option value="">Selecione uma marca</option>
+
                     {marks.map((m, i) => (
                       <option key={i} value={m}>
                         {m}
@@ -269,9 +288,7 @@ export default function EditModel() {
                     arrow_back
                   </Link>
 
-                  <button type="submit">
-                    Salvar
-                  </button>
+                  <button type="submit">Salvar</button>
                 </div>
 
               </form>

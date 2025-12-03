@@ -137,6 +137,19 @@ export default function Edit() {
                         }
                       />
                     </label>
+                    <label htmlFor="Base">
+                      Base
+                      <input
+                        type="radio"
+                        id="Base"
+                        name="tipo"
+                        value="Base"
+                        checked={productData.tipo === "Base"}
+                        onChange={(e) =>
+                          setProductData({ ...productData, tipo: e.target.value })
+                        }
+                      />
+                    </label>
 
                   </div>
                 </fieldset>

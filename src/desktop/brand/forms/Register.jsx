@@ -10,7 +10,7 @@ export default function RegisterModel() {
 
   // especificações dinâmicas
   const [especificacoes, setEspecificacoes] = useState([
-    { tipo: "", valor: "" },
+    { tipo: "", valor: "", variacao: "" },
   ]);
 
   // dados do backend
@@ -67,6 +67,8 @@ export default function RegisterModel() {
         const res = await fetch(`${host}/mark/listTypeShoes`);
         const data = await res.json();
 
+        console.log(data)
+
         if (data.ok === 200) {
           setShoeTypes(data.types);
         }
@@ -76,14 +78,17 @@ export default function RegisterModel() {
     };
 
     loadTypes();
-    loadTypesShoe()
+    loadTypesShoe();
   }, []);
 
   // ============================
   // ➕ Adicionar especificação
   // ============================
   const addSpec = () => {
-    setEspecificacoes([...especificacoes, { tipo: "", valor: "" }]);
+    setEspecificacoes([
+      ...especificacoes,
+      { tipo: "", valor: "", variacao: "" },
+    ]);
   };
 
   // ============================
@@ -131,11 +136,11 @@ export default function RegisterModel() {
       setMsg("Modelo cadastrado com sucesso!");
       setPopUp(true);
 
+      // resetar campos
       setNome("");
       setTipo("");
       setMarca("");
-      setEspecificacoes([{ tipo: "", valor: "" }]);
-
+      setEspecificacoes([{ tipo: "", valor: "", variacao: "" }]);
     } catch (err) {
       setMsg(err.message);
       setPopUp(true);
@@ -197,6 +202,7 @@ export default function RegisterModel() {
                   {especificacoes.map((esp, index) => (
                     <div key={index} className="spec-item">
 
+                      {/* Tipo de Teste */}
                       <select
                         value={esp.tipo}
                         onChange={(e) =>
@@ -212,12 +218,24 @@ export default function RegisterModel() {
                         ))}
                       </select>
 
+                      {/* Valor */}
                       <input
                         type="number"
                         placeholder="Valor"
                         value={esp.valor}
                         onChange={(e) =>
                           updateSpec(index, "valor", e.target.value)
+                        }
+                        required
+                      />
+
+                      {/* Variação */}
+                      <input
+                        type="number"
+                        placeholder="Variação (%)"
+                        value={esp.variacao}
+                        onChange={(e) =>
+                          updateSpec(index, "variacao", e.target.value)
                         }
                         required
                       />

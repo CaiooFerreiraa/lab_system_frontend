@@ -12,7 +12,7 @@ export default function Sector({search}) {
     fetch(`${host}/sector/read`)
       .then((response) => response.json())
       .then((data) => {
-        setSector(data.setores)
+        setSector(data.setores || [])
       })
       .catch((err) => console.error("Houve um error: ", err))
       .finally(() => setLoading(false));
@@ -20,7 +20,6 @@ export default function Sector({search}) {
 
   useEffect(() => {
     fetchFromApi();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
 
@@ -28,7 +27,7 @@ export default function Sector({search}) {
     <>
       {loading && <Load />}
       <div className="main-card">
-        <Card elemets={sector} search={search} onRefresh={fetchFromApi}/>
+        <Card elements={sector} search={search} onRefresh={fetchFromApi}/>
       </div>
     </>
   )
