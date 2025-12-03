@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Card({ marks = [], search = "", onRefresh, setPopUp, setMsg }) {
+export default function Card({ marks = [], search = "", onRefresh }) {
   const filteredMarks = marks.filter((mark) =>
     mark.marca.toLowerCase().includes(search.toLowerCase())
   );

@@ -1,14 +1,14 @@
-import InfoCard from './InfoCard';
-import { Link } from "react-router-dom"
+import InfosCards from "./InfosCards.jsx";
+import { Link } from "react-router-dom";
 
-export default function MainCardMark({dataMarks, onRefresh, search}) {
+export default function MainPageProduct({ products = [], onRefresh, search }) {
   return (
     <main id="cardMain" className="main-page-employee">
       {/* 🔹 Cabeçalho de ações */}
       <section className="employee-actions">
         <div id="registerEmployee" className="register-employee">
-          <Link to="/mark/register" className="link">
-            Cadastrar Marca
+          <Link to="/product/register" className="link">
+            Cadastrar Produto
           </Link>
         </div>
       </section>
@@ -16,9 +16,9 @@ export default function MainCardMark({dataMarks, onRefresh, search}) {
       {/* 🔹 Listagem de funcionários */}
       <section className="employee-list">
         <div className="employee-list-container">
-          <InfoCard marks={dataMarks} onRefresh={onRefresh} search={search} />
+          <InfosCards products={products} onRefresh={onRefresh} search={search} />
         </div>
       </section>
     </main>
-  )
+  );
 }

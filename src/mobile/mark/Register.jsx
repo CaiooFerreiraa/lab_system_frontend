@@ -93,7 +93,6 @@ export default function Register() {
                       id={`method-${method.id}`}
                       value={method.name}
                       onChange={(e) => handleChange(method.id, "name", e.target.value)}
-                      required
                     />
 
                     <label htmlFor={`description-${method.id}`}>
@@ -106,7 +105,6 @@ export default function Register() {
                       onChange={(e) =>
                         handleChange(method.id, "description", e.target.value)
                       }
-                      required
                     ></textarea>
 
                     <button

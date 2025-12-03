@@ -4,7 +4,8 @@ export default function HomeApp() {
   return (
     <>
       <Link to={"/employee"}>Funcionários</Link><br />
-      <Link to={"/mark"}>Marcas</Link>
+      <Link to={"/mark"}>Marcas</Link><br/>
+      <Link to={"/product"}>Produtos</Link>
     </>
   )
 }
