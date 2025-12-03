@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import Card from "./_components/Card";
 import Load from "./_components/Load";
+import PopUp from "./_components/PopUp";
 
 export default function Mark({search}) {
   const [marks, setMarks] = useState([]);
   const host = import.meta.env.VITE_API_URL;
   const [loading, setLoading] = useState(false);
-  // const [popUp, setPopUp] = useState(false);
-  // const [msg, setMsg] = useState("");
+  const [popUp, setPopUp] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const fetchMarkFromApi = () => {
     setLoading(true)
@@ -29,8 +30,9 @@ export default function Mark({search}) {
   return (
     <>
       {loading && <Load />}
+      {popUp && <PopUp msg={msg} setPopUp={setPopUp}/>}
       <div className="main-card">
-        <Card marks={marks} search={search} onRefresh={fetchMarkFromApi}/>
+        <Card marks={marks} search={search} onRefresh={fetchMarkFromApi} setPopUp={setPopUp} setMsg={setMsg}/>
       </div>
     </>
   )
