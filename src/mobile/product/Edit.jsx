@@ -102,58 +102,59 @@ export default function Edit() {
           <div className="formMain">
             <div className="form-container">
 
-              <form onSubmit={handleSubmit} id="editFormProduct">
+              <form onSubmit={handleSubmit} id="registerFormMark">
 
                 {/* 🔹 Tipo (Primary Radio) */}
                 <fieldset className="labelForm shifts">
                   <div className="shift-options">
 
+                    <input
+                      type="radio"
+                      id="DN"
+                      name="tipo"
+                      value="DN"
+                      checked={productData.tipo === "DN"}
+                      onChange={(e) =>
+                        setProductData({ ...productData, tipo: e.target.value })
+                      }
+                    />
                     <label htmlFor="DN">
                       DN
-                      <input
-                        type="radio"
-                        id="DN"
-                        name="tipo"
-                        value="DN"
-                        checked={productData.tipo === "DN"}
-                        onChange={(e) =>
-                          setProductData({ ...productData, tipo: e.target.value })
-                        }
-                      />
                     </label>
 
+                    <input
+                      type="radio"
+                      id="BN"
+                      name="tipo"
+                      value="BN"
+                      checked={productData.tipo === "BN"}
+                      onChange={(e) =>
+                        setProductData({ ...productData, tipo: e.target.value })
+                      }
+                    />
                     <label htmlFor="BN">
                       BN
-                      <input
-                        type="radio"
-                        id="BN"
-                        name="tipo"
-                        value="BN"
-                        checked={productData.tipo === "BN"}
-                        onChange={(e) =>
-                          setProductData({ ...productData, tipo: e.target.value })
-                        }
-                      />
                     </label>
+
+                    <input
+                      type="radio"
+                      id="Base"
+                      name="tipo"
+                      value="Base"
+                      checked={productData.tipo === "Base"}
+                      onChange={(e) =>
+                        setProductData({ ...productData, tipo: e.target.value })
+                      }
+                    />
                     <label htmlFor="Base">
                       Base
-                      <input
-                        type="radio"
-                        id="Base"
-                        name="tipo"
-                        value="Base"
-                        checked={productData.tipo === "Base"}
-                        onChange={(e) =>
-                          setProductData({ ...productData, tipo: e.target.value })
-                        }
-                      />
                     </label>
 
                   </div>
                 </fieldset>
 
                 {/* 🔹 Referência */}
-                <label htmlFor="ref">Referência</label>
+                <label htmlFor="ref">Código do Produto *</label>
                 <input
                   type="text"
                   id="ref"

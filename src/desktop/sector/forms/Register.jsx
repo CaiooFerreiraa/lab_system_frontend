@@ -52,7 +52,7 @@ export default function RegisterSector() {
 
         <section className="register-section">
           <div className="formMain">
-            <div className="form-container">
+            <div className="form-sector">
 
               <form onSubmit={handleSubmit}>
                 <label htmlFor="sector">Nome do Setor</label>

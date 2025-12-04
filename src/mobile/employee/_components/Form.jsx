@@ -51,40 +51,40 @@ export default function Form({
         {/* 🔹 Turnos (A, B, C) */}
         <fieldset className="labelForm shifts">
           <div className="shift-options">
+            <input
+              type="radio"
+              name="shift"
+              id="shiftA"
+              defaultValue="Turno A"
+              checked={shift === "Turno A"}
+              onChange={(e) => setShift(e.target.value)}
+            />
             <label htmlFor="shiftA">
               Turno A
-              <input
-                type="radio"
-                name="shift"
-                id="shiftA"
-                defaultValue="Turno A"
-                checked={shift === "Turno A"}
-                onChange={(e) => setShift(e.target.value)}
-              />
             </label>
 
+            <input
+              type="radio"
+              name="shift"
+              id="shiftB"
+              defaultValue="Turno B"
+              checked={shift === "Turno B"}
+              onChange={(e) => setShift(e.target.value)}
+            />
             <label htmlFor="shiftB">
               Turno B
-              <input
-                type="radio"
-                name="shift"
-                id="shiftB"
-                defaultValue="Turno B"
-                checked={shift === "Turno B"}
-                onChange={(e) => setShift(e.target.value)}
-              />
             </label>
 
+            <input
+              type="radio"
+              name="shift"
+              id="shiftC"
+              defaultValue="Turno C"
+              checked={shift === "Turno C"}
+              onChange={(e) => setShift(e.target.value)}
+            />
             <label htmlFor="shiftC">
               Turno C
-              <input
-                type="radio"
-                name="shift"
-                id="shiftC"
-                defaultValue="Turno C"
-                checked={shift === "Turno C"}
-                onChange={(e) => setShift(e.target.value)}
-              />
             </label>
           </div>
         </fieldset>

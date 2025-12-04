@@ -1,0 +1,98 @@
+.model-info-container {
+  padding: 25px 40px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #222;
+}
+
+/* Topo com ações */
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+/* Botão voltar */
+.arrow-back {
+  background: #7d4cff;
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-size: 22px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+/* botões editar e deletar */
+.edit-btn {
+  background: transparent;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+.edit-btn:hover {
+  background: #f1f1f1;
+}
+
+/* Título do modelo */
+.model-info-container h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+/* Bloco com Tipo e Marca */
+.info-block {
+  margin-bottom: 25px;
+}
+
+.info-block p {
+  font-size: 18px;
+  margin: 4px 0;
+}
+
+/* Título das especificações */
+.model-info-container h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+/* Lista de especificações */
+.speci-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Item individual */
+.spec-item {
+  padding: 12px 16px;
+  border-left: 3px solid #7d4cff;
+  background: #fafafa;
+  border-radius: 6px;
+}
+
+.spec-item p {
+  margin: 2px 0;
+  font-size: 17px;
+}
+
+.action-footer {
+  margin-top: 10px;
+
+  .btn-primary {
+    display: flex;
+    justify-content: center;
+    background-color: #7d4cff;
+    border: none;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+  }
+}

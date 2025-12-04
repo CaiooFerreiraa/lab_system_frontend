@@ -166,13 +166,13 @@ export default function EditModel() {
 
         <section className="register-section">
           <div className="formMain">
-            <div className="form-container">
+            <div className="form-model">
 
-              <form onSubmit={handleSubmit} id="editFormModel">
+              <form onSubmit={handleSubmit} id="registerFormModel">
 
                 {/* Nome */}
                 <div>
-                  <label htmlFor="nome">Nome do Modelo</label>
+                  <label htmlFor="nome">Nome do Modelo *</label>
                   <input
                     type="text"
                     id="nome"
@@ -183,8 +183,8 @@ export default function EditModel() {
                 </div>
 
                 {/* Tipo */}
-                <div>
-                  <label htmlFor="tipo">Tipo</label>
+                <div className="input-tipo">
+                  <label htmlFor="tipo">Tipo *</label>
                   <select
                     id="tipo"
                     value={tipo}
@@ -202,8 +202,8 @@ export default function EditModel() {
                 </div>
 
                 {/* Especificações */}
-                <div>
-                  <label>Especificações do Modelo</label>
+                <div className="list-testes">
+                  <label>Especificações do Modelo *</label>
 
                   {especificacoes.map((esp, index) => (
                     <div key={index} className="spec-item">
@@ -246,15 +246,15 @@ export default function EditModel() {
                         required
                       />
 
-                      {index > 0 && (
-                        <button
-                          type="button"
-                          className="remove-btn"
-                          onClick={() => removeSpec(index)}
-                        >
-                          Remover
-                        </button>
-                      )}
+                      
+                      <button
+                        type="button"
+                        className="remove-btn material-symbols-outlined"
+                        onClick={() => removeSpec(index)}
+                      >
+                        delete
+                      </button>
+                      
                     </div>
                   ))}
 
@@ -264,8 +264,8 @@ export default function EditModel() {
                 </div>
 
                 {/* Marca */}
-                <div>
-                  <label htmlFor="marca">Marca</label>
+                <div className="input-tipo">
+                  <label htmlFor="marca">Marca *</label>
                   <select
                     id="marca"
                     value={marca}
