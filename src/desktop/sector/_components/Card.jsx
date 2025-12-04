@@ -59,7 +59,7 @@ function InfoCard({data, onRefresh}) {
   return ( 
     <>
       {loading && <Load />}
-      <div className="cardMark-desktop" onClick={handleViewSector}> 
+      <div className="cardMark-desktop"> 
         <div className="infos" key={data.nome}> 
           <span className="nameMark value">{data.nome[0]?.toUpperCase() || "S"}</span> 
           <span className="setor value">
@@ -68,6 +68,13 @@ function InfoCard({data, onRefresh}) {
         </div> 
         
         <div className="functionButtons-desktop"> 
+          <button
+            className="material-symbols-outlined action-desktop"
+            onClick={handleViewSector}
+          >
+            eye_tracking
+          </button>
+
           <button 
             className="material-symbols-outlined action-desktop" 
             onClick={(ev) => {
