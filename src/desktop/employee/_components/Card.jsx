@@ -2,13 +2,19 @@ import { useNavigate } from "react-router-dom";
 
 export default function Card({ employees = [], search = "", onRefresh, setPopUp, setMsg, setLoading }) {
   const filteredEmployees = employees.filter((employee) =>
-    employee.nome.toLowerCase().includes(search.toLowerCase())
+    employee?.nome.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div>
       {filteredEmployees.map((element, index) => (
-        <InfoCard data={element} key={index} onRefresh={onRefresh} setPopUp={setPopUp} setMsg={setMsg} setLoading={setLoading}/>
+        <InfoCard 
+          data={element} 
+          key={index}
+          onRefresh={onRefresh} 
+          setPopUp={setPopUp} 
+          setMsg={setMsg} 
+          setLoading={setLoading}/>
       ))}
     </div>
   )

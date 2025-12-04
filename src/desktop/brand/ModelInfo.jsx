@@ -1,3 +1,4 @@
+import '../../css/ModelInfo.css'
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Load from "./_components/Load";
@@ -48,7 +49,7 @@ export default function ModelInfo() {
         >
           edit
         </button>
-                <button 
+        <button 
           className="material-symbols-outlined edit-btn"
           onClick={() => handleDelete()}
         >
@@ -65,7 +66,7 @@ export default function ModelInfo() {
 
       <h2>Especificações</h2>
 
-      <div className="spec-list">
+      <div className="speci-list">
         {data.especificacoes.map((esp, i) => (
           <div key={i} className="spec-item">
             <p><b>Teste:</b> {esp.tipo}</p>

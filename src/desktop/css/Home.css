@@ -148,14 +148,14 @@
     margin: 5px 40px;
   }
 
-  .form-container {
-    margin-top: 10px;
-    width: 95%;
-  }
 
   #registerFormMark {
     box-shadow: none;
     border: 1px solid lightgray;
+    width: 95%;
+  }
+
+  #registerFormProduct {
     width: 95%;
   }
 
@@ -164,6 +164,16 @@
     width: 95%;
     box-shadow: none;
     border: 1px solid lightgray;
+
+    input {
+      margin-bottom: 15px;
+      border: 1px solid lightgray;
+    }
+
+    textarea {
+      border: 1px solid lightgray;
+      padding: 5px;
+    }
   }
 
   .formMain {
@@ -179,9 +189,34 @@
     height: 100%;
   }
 
+  .form-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .form-sector {
+    margin-top: 10px;
+
+    #sector {
+      padding: 2px 5px;
+    }
+
+    .but {
+      margin-top: 5px;
+    }
+  }
+
+  .form-model {
+    margin-top: 10px;
+  }
+
   .form-section {
     margin-top: 10px;
-    width: 95%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .register-header {
@@ -191,7 +226,7 @@
   #formRegister {
     border: 1px solid lightgray;
     box-shadow: none;
-    width: 100%;
+    width: 95%;
     margin-bottom: 10px;
   }
 

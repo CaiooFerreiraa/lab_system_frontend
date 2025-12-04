@@ -150,8 +150,6 @@ export default function SectorInfo() {
                 {material.Descricao && (
                   <p><b>Descrição:</b> {material.Descricao}</p>
                 )}
-
-                <p><b>Setor:</b> {material.Setor}</p>
               </div>
             ))
           )}

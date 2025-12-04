@@ -67,8 +67,6 @@ export default function RegisterModel() {
         const res = await fetch(`${host}/mark/listTypeShoes`);
         const data = await res.json();
 
-        console.log(data)
-
         if (data.ok === 200) {
           setShoeTypes(data.types);
         }
@@ -161,13 +159,13 @@ export default function RegisterModel() {
 
         <section className="register-section">
           <div className="formMain">
-            <div className="form-container">
+            <div className="form-model">
 
               <form onSubmit={handleRegister} id="registerFormModel">
 
                 {/* Nome */}
                 <div>
-                  <label htmlFor="nome">Nome do Modelo</label>
+                  <label htmlFor="nome">Nome do Modelo *</label>
                   <input
                     type="text"
                     id="nome"
@@ -178,15 +176,15 @@ export default function RegisterModel() {
                 </div>
 
                 {/* Tipo */}
-                <div>
-                  <label htmlFor="tipo">Tipo</label>
+                <div className="input-tipo">
+                  <label htmlFor="tipo">Tipo *</label>
                   <select
                     id="tipo"
                     value={tipo}
                     onChange={(e) => setTipo(e.target.value)}
                     required
                   >
-                    <option value="">Selecione o tipo</option>
+                    <option value="">Selecione o Tipo do Tênis</option>
                     {shoeTypes.map((t, i) => (
                       <option key={i} value={t}>
                         {t}
@@ -196,7 +194,7 @@ export default function RegisterModel() {
                 </div>
 
                 {/* Especificações Dinâmicas */}
-                <div>
+                <div className="list-testes">
                   <label>Especificações do Modelo</label>
 
                   {especificacoes.map((esp, index) => (
@@ -232,7 +230,7 @@ export default function RegisterModel() {
                       {/* Variação */}
                       <input
                         type="number"
-                        placeholder="Variação (%)"
+                        placeholder="Variação"
                         value={esp.variacao}
                         onChange={(e) =>
                           updateSpec(index, "variacao", e.target.value)
@@ -240,15 +238,13 @@ export default function RegisterModel() {
                         required
                       />
 
-                      {index > 0 && (
-                        <button
-                          type="button"
-                          className="remove-btn"
-                          onClick={() => removeSpec(index)}
-                        >
-                          Remover
-                        </button>
-                      )}
+                      <button
+                        type="button"
+                        className="remove-btn material-symbols-outlined"
+                        onClick={() => removeSpec(index)}
+                      >
+                        delete
+                      </button>
                     </div>
                   ))}
 
@@ -258,8 +254,8 @@ export default function RegisterModel() {
                 </div>
 
                 {/* Marca */}
-                <div>
-                  <label htmlFor="marca">Marca</label>
+                <div className="input-tipo">
+                  <label htmlFor="marca">Marca *</label>
                   <select
                     id="marca"
                     value={marca}

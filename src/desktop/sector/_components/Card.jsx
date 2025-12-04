@@ -53,7 +53,7 @@ function InfoCard({data, onRefresh}) {
 
   const handleEdit = (ev) => { 
     ev.stopPropagation();
-    navigate(`/sector/edit/${data.nome.toLowerCase()}`); 
+    navigate(`/sector/edit/${data.nome}`); 
   }; 
 
   return ( 

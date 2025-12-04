@@ -4,6 +4,8 @@ import './css/Header.css'
 import './css/InfoCards.css'
 import './css/Load.css'
 import './css/PopUp.css'
+import './css/Desktop.css'
+import './css/InputRadios.css'
 import { Routes, Route } from "react-router-dom";
 
 import HomeEmployee from './mobile/employee/Home';

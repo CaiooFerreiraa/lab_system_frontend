@@ -75,45 +75,46 @@ export default function Register() {
                 <div>
                   <fieldset className="labelForm shifts">
                     <div className="shift-options">
+                      
+                      <input
+                        type="radio"
+                        name="referencia"
+                        id="DN"
+                        defaultValue="DN"
+                        checked={type === "DN"}
+                        onChange={(e) => setType(e.target.value)}
+                      />
                       <label htmlFor="DN">
                         DN
-                        <input
-                          type="radio"
-                          name="referencia"
-                          id="DN"
-                          defaultValue="DN"
-                          checked={type === "DN"}
-                          onChange={(e) => setType(e.target.value)}
-                        />
                       </label>
 
+                      <input
+                        type="radio"
+                        name="referencia"
+                        id="BN"
+                        defaultValue="BN"
+                        checked={type === "BN"}
+                        onChange={(e) => setType(e.target.value)}
+                      />
                       <label htmlFor="BN">
                         BN
-                        <input
-                          type="radio"
-                          name="referencia"
-                          id="BN"
-                          defaultValue="BN"
-                          checked={type === "BN"}
-                          onChange={(e) => setType(e.target.value)}
-                        />
                       </label>
 
+                      <input
+                        type="radio"
+                        name="referencia"
+                        id="Base"
+                        defaultValue="Base"
+                        checked={type === "Base"}
+                        onChange={(e) => setType(e.target.value)}
+                      />
                       <label htmlFor="Base">
                         Base
-                        <input
-                          type="radio"
-                          name="referencia"
-                          id="Base"
-                          defaultValue="Base"
-                          checked={type === "Base"}
-                          onChange={(e) => setType(e.target.value)}
-                        />
                       </label>
                     </div>
                   </fieldset>
 
-                  <label htmlFor="product">Referência do produto</label>
+                  <label htmlFor="product">Código do Material *</label>
                   <input
                     type="text"
                     name="product"
@@ -123,12 +124,21 @@ export default function Register() {
                     required
                   />
 
-                  <select name="mark" id="mark" onChange={(e) => setSector(e.target.value)}>
-                    <option>Selecione uma marca</option>
-                    {dataSector.map((sector, index) => {
-                      return <option value={sector.nome} key={index}>{sector.nome}</option>
-                    })}
-                  </select>
+                  <div className="custom-select">
+                    <select
+                      name="mark"
+                      id="mark"
+                      onChange={(e) => setSector(e.target.value)}
+                    >
+                      <option>Selecione um Setor</option>
+                      {dataSector.map((sector, index) => (
+                        <option value={sector.nome} key={index}>
+                          {sector.nome}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
                 </div>
 
                 <div className="but">

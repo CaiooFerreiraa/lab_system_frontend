@@ -1,34 +1,43 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Card({ elements = [], search = "", onRefresh }) {
-  const safeElements = Array.isArray(elements) ? elements : [];
-
-  const filteredItens = safeElements.filter((model) => {
-    if (!model || !model.nome) return false;
-    return model.nome.toLowerCase().includes(search.toLowerCase());
+export default function Card({ elements = [], search = "", onRefresh, setMsg, setPopUp, setLoading }) {
+  const filteredItens = elements.filter((model) => {
+    return model?.nome.toLowerCase().includes(search.toLowerCase());
   });
 
   return (
     <div>
       {filteredItens.map((element, index) => (
-        <InfoCard data={element} key={index} onRefresh={onRefresh} />
+        <InfoCard 
+          data={element} 
+          key={index} 
+          onRefresh={onRefresh} 
+          setMsg={setMsg} 
+          setPopUp={setPopUp} 
+          setLoading={setLoading}/>
       ))}
     </div>
   );
 }
 
-function InfoCard({ data, onRefresh }) {
+function InfoCard({ data, onRefresh, setMsg, setPopUp, setLoading }) {
   const host = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const handleDelete = () => {
     if (!confirm("Deseja excluir esse produto?")) return;
 
+    setLoading(true)
     fetch(`${host}/model/delete?nome=${encodeURIComponent(data.nome)}`, {
       method: "DELETE",
     })
-      .then(() => onRefresh?.())
-      .catch((err) => console.error("Houve um erro: " + err));
+      .then(() => {
+        setMsg("Modelo deletado com sucesso!")
+        setPopUp(true)
+        onRefresh();
+      })
+      .catch((err) => console.error("Houve um erro: " + err))
+      .finally(() => setLoading(false));
   };
 
   const handleOpen = () => navigate(`/model/view/${data.nome}`);

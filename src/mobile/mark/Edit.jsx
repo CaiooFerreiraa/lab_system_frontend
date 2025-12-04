@@ -19,6 +19,8 @@ export default function Edit() {
         const res = await fetch(`${host}/mark/update/${mark}`);
         if (!res.ok) throw new Error("Erro ao buscar marca");
         const data = await res.json();
+        console.log(data)
+
         setMarkData(data[0]);
       } catch (err) {
         console.error(err);

@@ -4,7 +4,7 @@ import PopUp from "../_components/PopUp";
 import Load from "../_components/Load";
 
 export default function EditSector() {
-  const { uuid } = useParams();
+  const { nome } = useParams();
   const host = import.meta.env.VITE_API_URL;
 
   const [loading, setLoading] = useState(false);
@@ -18,13 +18,15 @@ export default function EditSector() {
     const fetchSector = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${host}/sector/search?uuid=${uuid}`);
+        const res = await fetch(`${host}/sector/search?nome=${nome}`);
         const data = await res.json();
+
+        console.log(data.setor[0].nome)
 
         if (!data.setor) throw new Error("Setor não encontrado");
 
-        setOldName(data.setor.nome);
-        setNewName(data.setor.nome);
+        setOldName(data.setor[0].nome);
+        setNewName(data.setor[0].nome);
 
       } catch (err) {
         setMsg(err.message);
@@ -35,7 +37,7 @@ export default function EditSector() {
     };
 
     fetchSector();
-  }, [host, uuid]);
+  }, [host, nome]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,7 +76,7 @@ export default function EditSector() {
 
         <section className="register-section">
           <div className="formMain">
-            <div className="form-container">
+            <div className="form-sector">
 
               <form onSubmit={handleSubmit}>
 
