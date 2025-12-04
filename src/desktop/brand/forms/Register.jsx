@@ -43,6 +43,7 @@ export default function RegisterModel() {
     };
 
     loadMarks();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ============================
@@ -77,6 +78,7 @@ export default function RegisterModel() {
 
     loadTypes();
     loadTypesShoe();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ============================

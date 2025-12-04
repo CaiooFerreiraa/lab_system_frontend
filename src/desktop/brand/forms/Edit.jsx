@@ -14,6 +14,7 @@ export default function EditModel() {
   const [nome, setNome] = useState("");
   const [tipo, setTipo] = useState("");
   const [marca, setMarca] = useState("");
+  const [cod_modelo, setCod_Modelo] = useState(0)
 
   const [marks, setMarks] = useState([]);
   const [testTypes, setTestTypes] = useState([]);
@@ -28,13 +29,10 @@ export default function EditModel() {
     const loadInitialData = async () => {
       try {
         setLoading(true);
-        console.log(uuid)
 
         // Buscar modelo
         const res = await fetch(`${host}/model/search/${encodeURIComponent(uuid)}`);
         const data = await res.json();
-
-        console.log(data.modelo)
 
         if (!data.modelo) throw new Error("Modelo não encontrado");
 
@@ -43,6 +41,7 @@ export default function EditModel() {
         setNome(modelo.nome);
         setTipo(modelo.tipo);
         setMarca(modelo.marca);
+        setCod_Modelo(modelo.cod_modelo);
 
         // Mantém todas as especificações existentes corretamente
         setEspecificacoes(
@@ -125,6 +124,7 @@ export default function EditModel() {
     e.preventDefault();
 
     const dataModel = {
+      cod_modelo,
       nome,
       tipo,
       marca,
