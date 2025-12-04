@@ -19,6 +19,7 @@ export default function ModelInfo() {
       })
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDelete = () => {

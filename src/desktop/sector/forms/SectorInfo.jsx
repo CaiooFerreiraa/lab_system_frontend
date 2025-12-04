@@ -36,6 +36,7 @@ export default function SectorInfo() {
       }
     };
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nome]);
 
   // Buscar materiais do setor
@@ -62,6 +63,7 @@ export default function SectorInfo() {
     };
 
     if (data) fetchMateriais();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, nome]);
 
   // Excluir setor
