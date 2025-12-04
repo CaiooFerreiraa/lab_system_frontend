@@ -45,7 +45,6 @@ function InfoCard({ data, onRefresh, setMsg, setPopUp, setLoading }) {
   return (
     <div
       className="cardMark-desktop"
-      onClick={handleOpen}
       style={{ cursor: "pointer" }}
     >
       <div className="infos">
@@ -64,6 +63,13 @@ function InfoCard({ data, onRefresh, setMsg, setPopUp, setLoading }) {
       </div>
 
       <div className="functionButtons-desktop">
+        <button
+          className="material-symbols-outlined action-desktop"
+          onClick={handleOpen}
+        >
+          eye_tracking
+        </button>
+
         <button
           className="material-symbols-outlined action-desktop"
           onClick={(ev) => {
