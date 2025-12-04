@@ -41,7 +41,7 @@ function InfoCard({data, onRefresh, setPopUp, setMsg, setLoading}) {
     fetch(`${hostDeployment}/employee/delete/${registration}`, { method: "DELETE" })
       .then((response) => {
         if (response.ok) {
-          setMsg("Funcionário excuído com sucesso");
+          setMsg("Funcionário excluído com sucesso");
           setPopUp(true)
           setLoading(false)
           onRefresh()
