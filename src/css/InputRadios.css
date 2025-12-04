@@ -108,6 +108,8 @@
 }
 
 .list-testes {
+  display: flex;
+  flex-direction: column;
   margin-top: 20px;
 }
 
@@ -135,6 +137,7 @@
   color: white;
   font-size: 16px;
   font-weight: bold;
+  width: 250px;
 }
 
 .remove-btn {
