@@ -114,7 +114,7 @@ export default function Register() {
                     </div>
                   </fieldset>
 
-                  <label htmlFor="product">Código do Material *</label>
+                  <label htmlFor="product">Código do Produto *</label>
                   <input
                     type="text"
                     name="product"
