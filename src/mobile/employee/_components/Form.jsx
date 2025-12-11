@@ -16,6 +16,9 @@ export default function Form({
           <div className="labelForm">
             <label htmlFor="name">Nome:*</label>
             <input
+              required
+              pattern="[^/]*"
+              title="Não pode conter /"
               type="text"
               name="name"
               id="name"
@@ -27,9 +30,12 @@ export default function Form({
           <div className="labelForm">
             <label htmlFor="lastName">Sobrenome:*</label>
             <input
+              pattern="[^/]*"
+              title="Não pode conter /"
               type="text"
               name="lastName"
               id="lastName"
+              required
               defaultValue={user.lastName}
               onChange={handleChange}
             />
@@ -40,11 +46,17 @@ export default function Form({
         <div className="labelForm">
           <label htmlFor="registration">Matrícula*</label>
           <input
+            required
             type="text"
             name="registration"
             id="registration"
             defaultValue={registration}
-            onChange={handleChange}
+            onChange={(e) => {
+              if (e.target.value.includes('/')) alert("A matícula não pode conter barra")
+              const value = e.target.value.replace(/\//g, ""); // remove "/"
+              handleChange({ target: { name: "registration", value } });
+            }}
+            title="Não pode conter /"
           />
         </div>
 
@@ -64,6 +76,7 @@ export default function Form({
             </label>
 
             <input
+
               type="radio"
               name="shift"
               id="shiftB"

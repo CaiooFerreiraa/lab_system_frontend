@@ -174,10 +174,19 @@ export default function EditModel() {
                 <div>
                   <label htmlFor="nome">Nome do Modelo *</label>
                   <input
+                    pattern="[^/]+"
+                    title="Não pode conter /"
                     type="text"
                     id="nome"
                     value={nome}
-                    onChange={(e) => setNome(e.target.value)}
+                    onChange={(e) => {
+                      if (e.target.value.includes("/")) {
+                        setMsg("O nome do modelo não pode conter barra")
+                        setPopUp(true)
+                      }
+                      const value = e.target.value.replace(/\//g, "")
+                      setNome(value)
+                    }}
                     required
                   />
                 </div>
@@ -230,6 +239,8 @@ export default function EditModel() {
 
                       {/* Valor */}
                       <input
+                        pattern="[^/]+"
+                        title="Não pode conter /"
                         type="number"
                         placeholder="Valor"
                         value={esp.valor}
@@ -239,6 +250,8 @@ export default function EditModel() {
 
                       {/* Variação */}
                       <input
+                        pattern="[^/]+"
+                        title="Não pode conter /"
                         type="number"
                         placeholder="Variação"
                         value={esp.variacao}

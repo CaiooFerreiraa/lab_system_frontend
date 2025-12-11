@@ -60,7 +60,14 @@ export default function RegisterSector() {
                   type="text"
                   id="sector"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => {
+                    if (e.target.value.includes("/")) {
+                      setMsg("O nome do setor não pode conter barra")
+                      setPopUp(true)
+                    }
+                    const value = e.target.value.replace(/\//g, "")
+                    setName(value)
+                  }}
                   required
                 />
 

@@ -87,7 +87,14 @@ export default function EditSector() {
                 <input
                   type="text"
                   value={newName}
-                  onChange={(e) => setNewName(e.target.value)}
+                  onChange={(e) => {
+                    if (e.target.value.includes("/")) {
+                      setMsg("O nome do setor não pode conter barra")
+                      setPopUp(true)
+                    }
+                    const value = e.target.value.replace(/\//g, "")
+                    setNewName(value)
+                  }}
                   required
                 />
 

@@ -169,10 +169,19 @@ export default function RegisterModel() {
                 <div>
                   <label htmlFor="nome">Nome do Modelo *</label>
                   <input
+                    pattern="[^/]+"
+                    title="Não pode conter /"
                     type="text"
                     id="nome"
                     value={nome}
-                    onChange={(e) => setNome(e.target.value)}
+                    onChange={(e) => {
+                      if (e.target.value.includes("/")) {
+                        setMsg("O nome do modelo não pode conter barra")
+                        setPopUp(true)
+                      }
+                      const value = e.target.value.replace(/\//g, "")
+                      setNome(value)
+                    }}
                     required
                   />
                 </div>
@@ -222,6 +231,8 @@ export default function RegisterModel() {
                       <input
                         type="number"
                         placeholder="Valor"
+                        pattern="[^/]+"
+                        title="Não pode conter /"
                         value={esp.valor}
                         onChange={(e) =>
                           updateSpec(index, "valor", e.target.value)
@@ -231,6 +242,8 @@ export default function RegisterModel() {
 
                       {/* Variação */}
                       <input
+                        pattern="[^/]+"
+                        title="Não pode conter /"
                         type="number"
                         placeholder="Variação"
                         value={esp.variacao}

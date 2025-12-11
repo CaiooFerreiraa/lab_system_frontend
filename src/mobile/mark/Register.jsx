@@ -80,7 +80,14 @@ export default function Register() {
                     name="mark"
                     id="mark"
                     value={mark}
-                    onChange={(e) => setMark(e.target.value)}
+                    onChange={(e) => {
+                      if (e.target.value.includes('/')) {
+                        setMsg("A marca não pode ter barra");
+                        setPopUp(true)
+                      }
+                      const value = e.target.value.replace(/\//g, "");
+                      setMark(value)
+                    }}
                     required
                   />
                 </div>

@@ -162,9 +162,14 @@ export default function Edit() {
                   type="text"
                   id="ref"
                   value={productData.referencia}
-                  onChange={(e) =>
-                    setProductData({ ...productData, referencia: e.target.value })
-                  }
+                  onChange={(e) => {
+                    if (e.target.value.includes("/")) {
+                      setMsg("A referência não pode conter barra")
+                      setPopUp(true)
+                    }
+                    const value = e.target.value.replace(/\//g, "")
+                    setProductData({ ...productData, referencia: value })
+                  }}
                   required
                 />
 
@@ -175,9 +180,9 @@ export default function Edit() {
                     <select
                       id="sector"
                       value={productData.setor}
-                      onChange={(e) =>
+                      onChange={(e) => {
                         setProductData({ ...productData, setor: e.target.value })
-                      }
+                      }}
                       required
                     >
                       <option>Selecione um Setor</option>

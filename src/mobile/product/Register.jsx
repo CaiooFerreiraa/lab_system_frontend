@@ -120,7 +120,14 @@ export default function Register() {
                     name="product"
                     id="product"
                     value={product}
-                    onChange={(e) => setProduct(e.target.value)}
+                    onChange={(e) => {
+                      if (e.target.value.includes("/")) {
+                        setMsg("A referência não pode conter barra")
+                        setPopUp(true)
+                      }
+                      const value = e.target.value.replace(/\//g, "")
+                      setProduct(value)
+                    }}
                     required
                   />
 

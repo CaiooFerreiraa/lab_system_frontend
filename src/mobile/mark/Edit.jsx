@@ -120,14 +120,19 @@ export default function Edit() {
 
       <form onSubmit={handleSubmit} id="editFormMark">
         <div>
-          <label>Marca</label>
+          <label>Marca*</label>
           <input
             type="text"
             value={markData.marca || ""}
-            onChange={(e) =>
-              setMarkData({ ...markData, marca: e.target.value })
-            }
-            disabled
+            onChange={(e) =>{
+              if (e.target.value.includes('/')) {
+                setMsg("A marca não pode ter barra");
+                setPopUp(true)
+              }
+              const value = e.target.value.replace(/\//g, "");
+              setMarkData({ ...markData, marca: value })
+            }}
+            required
           />
         </div>
 
