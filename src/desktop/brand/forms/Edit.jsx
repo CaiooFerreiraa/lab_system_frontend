@@ -1,0 +1,315 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import PopUp from "../_components/PopUp";
+import Load from "../_components/Load";
+
+export default function EditModel() {
+  const { uuid } = useParams();
+  const host = import.meta.env.VITE_API_URL;
+
+  const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
+  const [popUp, setPopUp] = useState(false);
+
+  const [nome, setNome] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [marca, setMarca] = useState("");
+  const [cod_modelo, setCod_Modelo] = useState(0)
+
+  const [marks, setMarks] = useState([]);
+  const [testTypes, setTestTypes] = useState([]);
+  const [shoeTypes, setShoeTypes] = useState([]);
+
+  const [especificacoes, setEspecificacoes] = useState([]);
+
+  // ============================
+  // 🔥 Carregar dados iniciais
+  // ============================
+  useEffect(() => {
+    const loadInitialData = async () => {
+      try {
+        setLoading(true);
+
+        // Buscar modelo
+        const res = await fetch(`${host}/model/search/${encodeURIComponent(uuid)}`);
+        const data = await res.json();
+
+        if (!data.modelo) throw new Error("Modelo não encontrado");
+
+        const modelo = data.modelo;
+
+        setNome(modelo.nome);
+        setTipo(modelo.tipo);
+        setMarca(modelo.marca);
+        setCod_Modelo(modelo.cod_modelo);
+
+        // Mantém todas as especificações existentes corretamente
+        setEspecificacoes(
+          modelo.especificacoes?.map((e) => ({
+            tipo: e.tipo,
+            valor: e.valor,
+            variacao: e.variacao
+          })) || []
+        );
+
+        // Marcas
+        const resMarks = await fetch(`${host}/mark/view`);
+        const dataMarks = await resMarks.json();
+        if (Array.isArray(dataMarks)) {
+          setMarks(dataMarks.map((item) => item.marca));
+        }
+
+        // Tipos de teste ENUM
+        const resTypes = await fetch(`${host}/mark/list`);
+        const dataTypes = await resTypes.json();
+        if (dataTypes.ok === 200) setTestTypes(dataTypes.types);
+
+        // Tipos de sapato ENUM
+        const resShoe = await fetch(`${host}/mark/listTypeShoes`);
+        const dataShoe = await resShoe.json();
+        if (dataShoe.ok === 200) setShoeTypes(dataShoe.types);
+
+      } catch (err) {
+        setMsg(err.message);
+        setPopUp(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadInitialData();
+  }, [host, uuid]);
+
+  // ============================
+  // Calcular testes disponíveis
+  // ============================
+  const getAvailableTests = (currentIndex) => {
+    const selectedTests = especificacoes
+      .map((e, i) => (i === currentIndex ? null : e.tipo))
+      .filter(Boolean);
+
+    return testTypes.filter((t) => !selectedTests.includes(t));
+  };
+
+  // ============================
+  // Add Spec
+  // ============================
+  const addSpec = () => {
+    setEspecificacoes([
+      ...especificacoes,
+      { tipo: "", valor: "", variacao: "" }
+    ]);
+  };
+
+  // ============================
+  // Remove Spec
+  // ============================
+  const removeSpec = (index) => {
+    setEspecificacoes(especificacoes.filter((_, i) => i !== index));
+  };
+
+  // ============================
+  // Update Spec
+  // ============================
+  const updateSpec = (index, field, value) => {
+    const newSpecs = [...especificacoes];
+    newSpecs[index][field] = value;
+    setEspecificacoes(newSpecs);
+  };
+
+  // ============================
+  // Enviar atualização
+  // ============================
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const dataModel = {
+      cod_modelo,
+      nome,
+      tipo,
+      marca,
+      especificacoes,
+    };
+
+    try {
+      setLoading(true);
+
+      const res = await fetch(`${host}/model/edit`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataModel),
+      });
+
+      const data = await res.json();
+      if (data.ok !== 200) throw new Error(data.msg);
+
+      setMsg("Modelo atualizado com sucesso!");
+      setPopUp(true);
+
+    } catch (err) {
+      setMsg(err.message);
+      setPopUp(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      {loading && <Load />}
+      {popUp && <PopUp msg={msg} setPopUp={setPopUp} />}
+
+      <main className="register-main">
+        <header className="register-header">
+          <h1 className="tittle">Editar Modelo</h1>
+        </header>
+
+        <section className="register-section">
+          <div className="formMain">
+            <div className="form-model">
+
+              <form onSubmit={handleSubmit} id="registerFormModel">
+
+                {/* Nome */}
+                <div>
+                  <label htmlFor="nome">Nome do Modelo *</label>
+                  <input
+                    pattern="[^/]+"
+                    title="Não pode conter /"
+                    type="text"
+                    id="nome"
+                    value={nome}
+                    onChange={(e) => {
+                      if (e.target.value.includes("/")) {
+                        setMsg("O nome do modelo não pode conter barra")
+                        setPopUp(true)
+                      }
+                      const value = e.target.value.replace(/\//g, "")
+                      setNome(value)
+                    }}
+                    required
+                  />
+                </div>
+
+                {/* Tipo */}
+                <div className="input-tipo">
+                  <label htmlFor="tipo">Tipo *</label>
+                  <select
+                    id="tipo"
+                    value={tipo}
+                    onChange={(e) => setTipo(e.target.value)}
+                    required
+                  >
+                    <option value="">Selecione o tipo</option>
+
+                    {shoeTypes.map((t, i) => (
+                      <option key={i} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Especificações */}
+                <div className="list-testes">
+                  <label>Especificações do Modelo *</label>
+
+                  {especificacoes.map((esp, index) => (
+                    <div key={index} className="spec-item">
+
+                      {/* SELECT FILTRADO */}
+                      <select
+                        value={esp.tipo}
+                        onChange={(e) => updateSpec(index, "tipo", e.target.value)}
+                        required
+                      >
+                        <option value="">Tipo do Teste</option>
+
+                        {getAvailableTests(index).map((t, i) => (
+                          <option key={i} value={t}>
+                            {t}
+                          </option>
+                        ))}
+
+                        {/* Mantém o valor atual mesmo se já estiver usado */}
+                        {esp.tipo && !getAvailableTests(index).includes(esp.tipo) && (
+                          <option value={esp.tipo}>{esp.tipo}</option>
+                        )}
+                      </select>
+
+                      {/* Valor */}
+                      <input
+                        pattern="[^/]+"
+                        title="Não pode conter /"
+                        type="number"
+                        placeholder="Valor"
+                        value={esp.valor}
+                        onChange={(e) => updateSpec(index, "valor", e.target.value)}
+                        required
+                      />
+
+                      {/* Variação */}
+                      <input
+                        pattern="[^/]+"
+                        title="Não pode conter /"
+                        type="number"
+                        placeholder="Variação"
+                        value={esp.variacao}
+                        onChange={(e) => updateSpec(index, "variacao", e.target.value)}
+                        required
+                      />
+
+                      
+                      <button
+                        type="button"
+                        className="remove-btn material-symbols-outlined"
+                        onClick={() => removeSpec(index)}
+                      >
+                        delete
+                      </button>
+                      
+                    </div>
+                  ))}
+
+                  <button type="button" className="add-btn" onClick={addSpec}>
+                    Adicionar Especificação
+                  </button>
+                </div>
+
+                {/* Marca */}
+                <div className="input-tipo">
+                  <label htmlFor="marca">Marca *</label>
+                  <select
+                    id="marca"
+                    value={marca}
+                    onChange={(e) => setMarca(e.target.value)}
+                    required
+                  >
+                    <option value="">Selecione uma marca</option>
+
+                    {marks.map((m, i) => (
+                      <option key={i} value={m}>
+                        {m}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Botões */}
+                <div className="but">
+                  <Link to="/model" className="material-symbols-outlined arrow-back">
+                    arrow_back
+                  </Link>
+
+                  <button type="submit">Salvar</button>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
+  );
+}

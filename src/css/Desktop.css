@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+@media (min-width: 1024px) {
+  .container {
+    height: 100%;
+  }
+
+  .form-sector {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+
+    form {
+      width: 95%;
+
+      label::after {
+        content: '*';
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .aprovado {
+  background-color: aquamarine;
+  }
+
+  .concluído {
+    background-color: aquamarine;
+  }
+
+  .pendente, .reprovado {
+    background-color: red;
+  }
+
+  .em.andamento {
+    background-color: gold;
+  }
+}

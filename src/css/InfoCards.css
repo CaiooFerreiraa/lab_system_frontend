@@ -1,0 +1,123 @@
+#cardMain {
+  width: 100%;
+}
+
+.cardMainMark {
+  width: 100%;
+}
+
+.card, .card-product {
+  position: relative;
+  height: 210px;
+  width: 100%;
+  margin: 10px auto 5px auto;
+  padding: 5px 10px;
+  background-color: white;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.485);
+  border-radius: 10px;
+}
+
+.card-product {
+  height: 110px;
+}
+
+.cardMark {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 80px; /* altura mínima */
+  width: 100%;
+  margin: 10px auto 5px auto;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.485);
+  border-radius: 10px;
+}
+
+.buttonsMark {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.cardMark .buttonsMark button {
+  font-size: 40px;
+  background-color: transparent;
+  margin: 0 3px;
+  border: none;
+}
+
+.value {
+  font-size: 20px;
+}
+
+.marca {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid black;
+
+  .value {
+    font-size: 30px;
+  }
+}
+
+.keyMetodo {
+  font-size: 25px;
+}
+
+.nameMark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgb(120, 57, 205);
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.infos {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-size: 1.2em;
+
+  .nome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+    width: 100%;
+    font-size: 1.3em;
+
+    .imgName {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      background-color: rgb(120, 57, 205);
+      color: white;
+    }
+  }
+}
+
+.functionButtons {
+  position: absolute;
+  right: 0;
+  margin-right: 5px;
+
+  button {
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,309 @@
+@media (min-width: 1024px) {
+  :root {
+    --size-menu: 250px;
+    --size-header: 90px;
+  }
+
+  #root {
+    background-color: white;
+  }
+
+  .mainDesktop {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .navDesktop {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    position: fixed;
+    width: var(--size-menu);
+    height: 100vh;
+    background: rgb(249, 250, 252);
+    border: 1px solid rgba(128, 128, 128, 0.923);
+  }
+
+  .container {
+    margin-left: var(--size-menu);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .headerDesktop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: calc(100% - var(--size-menu));
+    background-color: rgb(249, 250, 252);
+    height: var(--size-header);
+    border: 1px solid lightgray;
+  }
+
+  .loadContainer {
+    z-index: 1000;
+  }
+
+  .componente {
+    overflow-y: auto;
+    margin-top: var(--size-header);
+    flex: 1;
+    background-color: rgb(241, 241, 241);
+  }
+
+  .register-main {
+    height: 100%;
+  }
+
+  .cardDesktop {
+    padding: 20px 15px;
+    border: 1px solid lightgray;
+    background-color: white;
+    margin: 10px 30px;
+  } 
+
+  .nome-desktop {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 600;
+    border-bottom: 2px solid lightgray;
+
+    .imgName-desktop {
+      display: flex;
+      justify-content: center;
+      height: 50px;
+      width: 50px;
+      align-items: center;
+      margin-bottom: 5px;
+      background-color: rgb(120, 57, 205);
+      border-radius: 50%;
+      color: white;
+    }
+  }
+
+  .infos-desktop {
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .functionButtons-desktop {
+    display: flex;
+    justify-content: flex-end;
+    color: black;
+    gap: 5px;
+
+    .action-desktop {
+      margin-top: 10px;
+      font-size: 30px;
+      border: none;
+      background-color: transparent;
+      color: black;
+    }
+  }
+
+  .link-desktop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: rgb(120, 57, 205);
+    text-decoration: none;
+    width: 300px;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    margin: auto;
+    height: 50px;
+    font-size: 25px;
+  }
+
+  .link-desktop:hover {
+    background-color: rgb(96, 47, 161); 
+  }
+
+  .container-search {
+    display: flex;
+
+    input {
+      border: 1px solid lightgray;
+      width: 50%;
+      margin: 5px 10px;
+    }
+  }
+
+  .cardMark-desktop {
+    padding: 20px 10px;
+    border: 1px solid lightgray;
+    margin: 5px 40px;
+  }
+
+
+  #registerFormMark {
+    box-shadow: none;
+    border: 1px solid lightgray;
+    width: 95%;
+  }
+
+  #registerFormProduct {
+    width: 95%;
+  }
+
+  #editFormMark {
+    margin: 10px auto;
+    width: 95%;
+    box-shadow: none;
+    border: 1px solid lightgray;
+
+    input {
+      margin-bottom: 15px;
+      border: 1px solid lightgray;
+    }
+
+    textarea {
+      border: 1px solid lightgray;
+      padding: 5px;
+    }
+  }
+
+  .formMain {
+    justify-content: inherit;
+    border: 1px solid lightgray;
+
+    input,textarea {
+      border: 1px solid lightgray;
+    }
+  }
+
+  .register-section {
+    height: 100%;
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .form-sector {
+    margin-top: 10px;
+
+    #sector {
+      padding: 2px 5px;
+    }
+
+    .but {
+      margin-top: 5px;
+    }
+  }
+
+  .form-model {
+    margin-top: 10px;
+  }
+
+  .form-section {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .register-header {
+    display: none;
+  }
+
+  #formRegister {
+    border: 1px solid lightgray;
+    box-shadow: none;
+    width: 95%;
+    margin-bottom: 10px;
+  }
+
+  .navDesktop ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    padding: 0;
+  }
+
+  .tittle {
+    display: none;
+  }
+
+  .navDesktop li {
+    margin-bottom: 12px;
+    width: 90%;
+  }
+
+  .menu-link {
+    display: flex;
+    align-items: center;
+    color: rgb(174, 174, 174);
+    height: 50px;
+    gap: 10px;
+    padding-left: 15px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 6px;
+    transition: background 0.2s;
+
+    span {
+      font-size: 35px;
+    }
+  }
+
+  /* quando ativo */
+  .menu-link.active {
+    color: rgb(120, 57, 205);
+    background-color: #f1eefe;
+    display: flex;
+    align-items: center;
+  }
+
+  .but {
+    display: flex;
+    justify-content: flex-end;
+
+    #subButton,.addMethod, button[type="submit"], a {
+      width: 200px;
+    }
+
+    .addMethod {
+      background-color: white;
+      border: 1px solid lightgray;
+      color: rgb(156, 156, 156);
+    }
+
+    .addMethod:hover {
+      background-color: rgb(238, 238, 238);
+      color: black;
+    }
+
+    a {
+      background-color: white;
+      border: 1px solid lightgray;
+      color: rgb(174, 174, 174);
+    }
+
+    a:hover {
+      background-color: rgb(238, 238, 238);
+      color: black;
+    }
+  }
+
+  .setor {
+    font-size: 30px;
+  }
+}
